@@ -1,6 +1,6 @@
 /**
  * Startlyst Public Headless SDK TypeScript Definitions (Mode C: Headless Backbone)
- * Canonical Origin: https://startlyst.commerce
+ * Canonical Origin: https://startlyst.com
  */
 export interface StartlystBundleOption {
   id: string;

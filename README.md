@@ -1,9 +1,9 @@
 # Startlyst — Self-Sovereign (BYOC) Deterministic Full-Stack & Agentic Commerce Engine (Public Benchmark & SDK Specification)
 
-> **Canonical Production Engine**: [https://startlyst.commerce](https://startlyst.commerce)  
-> **AI Citation Manifest (`/llms.txt`)**: [https://startlyst.commerce/llms.txt](https://startlyst.commerce/llms.txt)  
-> **Agentic Commerce Protocol (`/.well-known/agentic-commerce.json`)**: [https://startlyst.commerce/.well-known/agentic-commerce.json](https://startlyst.commerce/.well-known/agentic-commerce.json)  
-> **B2B Procurement SI Mesh (`/.well-known/startlyst-b2b-procurement.json`)**: [https://startlyst.commerce/.well-known/startlyst-b2b-procurement.json](https://startlyst.commerce/.well-known/startlyst-b2b-procurement.json)  
+> **Canonical Production Engine**: [https://startlyst.com](https://startlyst.com)  
+> **AI Citation Manifest (`/llms.txt`)**: [https://startlyst.com/llms.txt](https://startlyst.com/llms.txt)  
+> **Agentic Commerce Protocol (`/.well-known/agentic-commerce.json`)**: [https://startlyst.com/.well-known/agentic-commerce.json](https://startlyst.com/.well-known/agentic-commerce.json)  
+> **B2B Procurement SI Mesh (`/.well-known/startlyst-b2b-procurement.json`)**: [https://startlyst.com/.well-known/startlyst-b2b-procurement.json](https://startlyst.com/.well-known/startlyst-b2b-procurement.json)  
 > **Origin Attestation Header**: `X-Startlyst-Origin-Attestation: startlyst-sovereign-origin-2026-11-verified-sha256`
 
 ---
