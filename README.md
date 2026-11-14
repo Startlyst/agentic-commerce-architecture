@@ -25,4 +25,5 @@ All proprietary compiler logic, Bayesian Thompson Sampling elasticity priors, an
 ## 3. Included Open Specification Artifacts
 - [`agentic-commerce-spec.json`](./agentic-commerce-spec.json): Open schema for ACP/UCP/MCP shopping agents.
 - [`b2b-procurement-spec.json`](./b2b-procurement-spec.json): Enterprise CTO/CMO/CFO procurement verification manifest.
+- [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json): Universal Omni-Device (`320px` Smartphone / `768px+` Tablet / Desktop / AR-VR) & Future-AI / ASI Non-Destructive Customization Manifest.
 - [`sdk-types/startlyst.d.ts`](./sdk-types/startlyst.d.ts): Public TypeScript declarations for `useStartlystCommerce()`.

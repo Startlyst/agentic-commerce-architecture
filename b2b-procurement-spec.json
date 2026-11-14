@@ -15,9 +15,10 @@
     "llmsManifest": "https://startlyst.com/llms.txt",
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
+    "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
     "sitemap": "https://startlyst.com/sitemap.xml",
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "082e0eaa7eb56a68f528277d73b5b99c9549dc7d21b34556f9df0019cc0fe85c"
+  "merkleRootReference": "854f388281e89336034c4973f172617c030374ce12e5ab33c1d4481029d29a4c"
 }

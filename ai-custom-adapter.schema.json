@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaId": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+  "protocol": "startlyst.universal-omni-device-ai-adapter.v1",
+  "canonicalOrigin": "https://startlyst.com",
+  "nonDestructiveHostGuarantee": {
+    "cssIsolationScope": ".stlyst-isolated-scope",
+    "cssCustomPropertyNamespace": "--stlyst-*",
+    "zeroGlobalCssReset": true,
+    "zeroRootRouteTakeoverInSubpathOrHeadless": true,
+    "supportedMountModes": [
+      "standalone",
+      "subpath",
+      "headless"
+    ],
+    "headlessHookEntrypoint": "useStartlystCommerce()"
+  },
+  "omniDeviceViewportMatrix": {
+    "smartphone": {
+      "minWidthPx": 320,
+      "maxWidthPx": 767,
+      "minTouchTargetPx": 44,
+      "inputFontFloorPx": 16
+    },
+    "tablet": {
+      "minWidthPx": 768,
+      "maxWidthPx": 1023,
+      "minTouchTargetPx": 44,
+      "adaptiveGrid": true
+    },
+    "desktop": {
+      "minWidthPx": 1024,
+      "ultraWideReady": true
+    },
+    "futureSpatialAndFoldable": {
+      "dynamicViewportUnits": "dvh/svh",
+      "containerQueriesReady": true
+    }
+  },
+  "twoLayerIpBoundary": {
+    "openCustomizationZone": [
+      "user-workspace/**",
+      "src/components/**",
+      "src/app/globals.css",
+      "ai-custom-adapter.schema.json"
+    ],
+    "sealedProprietaryZone": [
+      "core-engine/sealed-core.cjs",
+      "core-engine/subscription-attestation-guard.ts"
+    ],
+    "policy": "Active subscribers and their AI agents (current LLMs through future Superintelligent AI / ASI) have 100% freedom to customize UI, responsive layouts, and checkout flows in user-workspace/** while sealed-core.cjs remains cryptographically attested."
+  }
+}

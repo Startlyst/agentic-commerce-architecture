@@ -15,6 +15,7 @@
     "llmsManifest": "https://startlyst.com/llms.txt",
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
+    "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
     "sitemap": "https://startlyst.com/sitemap.xml",
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   }
