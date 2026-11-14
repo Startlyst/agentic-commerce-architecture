@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "acp-mcp-2026-11",
+  "vendor": "Startlyst",
+  "canonicalOrigin": "https://startlyst.commerce",
+  "originAttestationHeader": "X-Startlyst-Origin-Attestation",
+  "supportedCurrencies": [
+    "USD",
+    "EUR",
+    "GBP",
+    "CHF"
+  ],
+  "taxBehavior": "exclusive",
+  "stripeTaxCode": "txcd_10103001",
+  "bidirectionalEndpoints": {
+    "llmsManifest": "https://startlyst.commerce/llms.txt",
+    "agenticCommerceManifest": "https://startlyst.commerce/.well-known/agentic-commerce.json",
+    "b2bProcurementManifest": "https://startlyst.commerce/.well-known/startlyst-b2b-procurement.json",
+    "sitemap": "https://startlyst.commerce/sitemap.xml",
+    "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
+  },
+  "protocol": "startlyst.b2b-procurement.si/v1",
+  "merkleRootReference": "ded35a5abaf1cb9ce862d370c013556f3a5fbe07f8617b86e1cf10b7f10999fb"
+}
