@@ -20,5 +20,26 @@
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "40ff1a4c2dbc96ba23d94a05cfa98d20039771c8c8d8960cc3b401fb8f5a9559"
+  "merkleRootReference": "461a076de57647e1bd29b4562c2d38d32d0165d46cb45b36f68216dcb4ca43da",
+  "enterpriseMsaGovernanceAndNonAffiliation": {
+    "agileAmendmentsWithoutPriorConsent": {
+      "clauseId": "SECTION_10_MSA_AND_SECTION_5_PRIVACY",
+      "priorIndividualNoticeOrConsentRequired": false,
+      "preAuthorizedByBuyerUponPurchaseOrSubscription": true,
+      "day1PerpetualByocOwnershipPreserved": true,
+      "summary": "Pre-authorized agile amendments to Terms of Service and Privacy Policy without prior individual consent to maintain continuous security resilience, AI/ASI protocol evolution (MCP/ACP/UCP), and domestic/international regulatory compliance while preserving Day-1 Perpetual BYOC ownership."
+    },
+    "completeNonAffiliationAndSoleMerchantSeparation": {
+      "clauseId": "SECTION_11_MSA_AND_SECTION_6_PRIVACY",
+      "platformRole": "NEUTRAL_BYOC_SOFTWARE_COMPILER_ONLY (MCC 5734_B2B_SOFTWARE_COMPILER)",
+      "deployingEnterpriseRole": "SOLE_MERCHANT_OF_RECORD_AND_SOLE_DATA_CONTROLLER",
+      "affiliationWithMaliciousUserCrimesOrUnlawfulActs": "ZERO_NEXUS_COMPLETE_NON_AFFILIATION",
+      "affiliationWithMerchantGoodsDigitalAssetsOrServices": "ZERO_NEXUS_COMPLETE_NON_AFFILIATION",
+      "unlawfulUseEnforcement": "IMMEDIATE_CRYPTOGRAPHIC_LICENSE_REVOCATION (LICENSE_REVOKED_COMPLIANCE_BREACH) AND 100_PCT_BUYER_INDEMNIFICATION"
+    },
+    "zipBundledLegalArtifacts": [
+      "LICENSE",
+      "TERMS_AND_PRIVACY.md"
+    ]
+  }
 }
