@@ -1,6 +1,8 @@
 {
   "schemaVersion": "acp-mcp-2026-11",
   "vendor": "Startlyst",
+  "organization": "Startlyst Global Sovereign Operations",
+  "contactEmail": "ops@startlyst.com",
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
   "supportedCurrencies": [
@@ -16,11 +18,14 @@
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
     "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+    "subscriptionPreferencesEndpoint": "https://startlyst.com/api/subscription/preferences",
+    "renewalNoticeEndpoint": "https://startlyst.com/api/subscription/renewal-notice",
+    "renewalDocumentEndpoint": "https://startlyst.com/api/subscription/renewal-document",
     "sitemap": "https://startlyst.com/sitemap.xml",
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "3e7ba09fed4924a3c97062d5b614615be2b8e7b9b057d951f67d49bd78b5275d",
+  "merkleRootReference": "5e36f787132b6808fdc620832e37e060feccf296fae8e509a3768dc85c76b25c",
   "enterpriseMsaGovernanceAndNonAffiliation": {
     "agileAmendmentsWithoutPriorConsent": {
       "clauseId": "SECTION_10_MSA_AND_SECTION_5_PRIVACY",

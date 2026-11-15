@@ -1,6 +1,8 @@
 {
   "schemaVersion": "acp-mcp-2026-11",
   "vendor": "Startlyst",
+  "organization": "Startlyst Global Sovereign Operations",
+  "contactEmail": "ops@startlyst.com",
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
   "supportedCurrencies": [
@@ -16,6 +18,9 @@
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
     "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+    "subscriptionPreferencesEndpoint": "https://startlyst.com/api/subscription/preferences",
+    "renewalNoticeEndpoint": "https://startlyst.com/api/subscription/renewal-notice",
+    "renewalDocumentEndpoint": "https://startlyst.com/api/subscription/renewal-document",
     "sitemap": "https://startlyst.com/sitemap.xml",
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   }
