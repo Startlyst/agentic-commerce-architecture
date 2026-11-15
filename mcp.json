@@ -1,0 +1,154 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "io.github.Startlyst/agentic-commerce-architecture",
+  "domainNamespace": "com.startlyst/agentic-commerce",
+  "title": "Startlyst Agentic Commerce MCP",
+  "description": "Self-sovereign BYOC headless commerce & agentic MCP checkout engine for B2B storefronts.",
+  "version": "1.0.0",
+  "websiteUrl": "https://startlyst.com",
+  "repository": {
+    "url": "https://github.com/Startlyst/agentic-commerce-architecture",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://startlyst.com/icon.svg",
+      "mimeType": "image/svg+xml"
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://startlyst.com/api/mcp"
+    }
+  ],
+  "protocolVersion": "2025-11-25",
+  "authentication": {
+    "required": false,
+    "type": "none_for_discovery_tools"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    }
+  },
+  "discovery": {
+    "serverManifest": "https://startlyst.com/.well-known/server.json",
+    "mcpManifest": "https://startlyst.com/.well-known/mcp.json",
+    "agenticCommerceSpec": "https://startlyst.com/.well-known/agentic-commerce.json",
+    "b2bProcurementSpec": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
+    "aiCustomAdapterSchema": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+    "llmsTxt": "https://startlyst.com/llms.txt"
+  },
+  "mcpServers": {
+    "startlyst-agentic-commerce": {
+      "type": "streamable-http",
+      "url": "https://startlyst.com/api/mcp",
+      "description": "Startlyst BYOC Headless Commerce, Licensing Catalog & Enterprise Procurement MCP Server"
+    }
+  },
+  "tools": [
+    {
+      "name": "get_storefront_catalog",
+      "description": "Retrieve Startlyst 4-tier self-sovereign BYOC licensing catalog (startup, growth, enterprise, holding), zero-commission economics, and monthly/annual pricing.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "billingCycle": {
+            "type": "string",
+            "enum": ["all", "monthly", "annual"],
+            "default": "all"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "evaluate_b2b_procurement_tco",
+      "description": "Evaluate 12-month BYOC license TCO vs variable GMV transaction fees across Startlyst licensing tiers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "annualGmvUsd": {
+            "type": "number",
+            "minimum": 10000,
+            "default": 5000000
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["single", "growth", "agency", "holding"],
+            "default": "growth"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_omni_device_adapter_spec",
+      "description": "Return non-destructive .stlyst-isolated-scope / --stlyst-* CSS and headless useStartlystCommerce() specs for micro_mobile, smartphone, tablet_foldable, desktop_studio, and spatial_future.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "targetDevice": {
+            "type": "string",
+            "enum": ["all", "micro_mobile", "smartphone", "tablet_foldable", "desktop_studio", "spatial_future"],
+            "default": "all"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "verify_legal_and_security_posture",
+      "description": "Inspect Startlyst MSA governance posture including Stripe fail-closed ZIP gating, Section 10 Agile Security Amendments, and Section 11 Merchant Illegal-Use Indemnification.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "section": {
+            "type": "string",
+            "enum": ["all", "agile-amendments", "illegal-use-indemnification", "stripe-artifact-gate"],
+            "default": "all"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "startlyst://specs/server",
+      "name": "Official MCP Registry Manifest",
+      "mimeType": "application/json",
+      "url": "https://startlyst.com/.well-known/server.json"
+    },
+    {
+      "uri": "startlyst://specs/agentic-commerce",
+      "name": "Agentic Commerce Protocol Manifest",
+      "mimeType": "application/json",
+      "url": "https://startlyst.com/.well-known/agentic-commerce.json"
+    },
+    {
+      "uri": "startlyst://specs/b2b-procurement",
+      "name": "B2B Procurement Verification Manifest",
+      "mimeType": "application/json",
+      "url": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json"
+    },
+    {
+      "uri": "startlyst://specs/ai-custom-adapter",
+      "name": "Universal Omni-Device & Future-AI Adapter Schema",
+      "mimeType": "application/json",
+      "url": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json"
+    },
+    {
+      "uri": "startlyst://docs/llms",
+      "name": "Startlyst LLMs Context & Architecture Summary",
+      "mimeType": "text/plain",
+      "url": "https://startlyst.com/llms.txt"
+    }
+  ]
+}

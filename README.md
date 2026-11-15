@@ -23,6 +23,8 @@ All proprietary compiler logic, Bayesian Thompson Sampling elasticity priors, an
 | **Tier 4: Global Holding** | `$9,999/mo` (`$99,990/yr`) | `€9,199/mo` (`€91,990/yr`) | `£7,899/mo` (`£78,990/yr`) | `CHF 8,799/mo` (`CHF 87,990/yr`) |
 
 ## 3. Included Open Specification Artifacts
+- [`server.json`](./server.json): Official MCP Registry manifest (`2025-12-11/server.schema.json`) for PulseMCP & MCP directory indexing.
+- [`mcp.json`](./mcp.json): MCP Server Card, client connection config, tools, and resources manifest (`/.well-known/mcp.json`).
 - [`agentic-commerce-spec.json`](./agentic-commerce-spec.json): Open schema for ACP/UCP/MCP shopping agents.
 - [`b2b-procurement-spec.json`](./b2b-procurement-spec.json): Enterprise CTO/CMO/CFO procurement verification manifest.
 - [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json): Universal Omni-Device (`320px` Smartphone / `768px+` Tablet / Desktop / AR-VR) & Future-AI / ASI Non-Destructive Customization Manifest.

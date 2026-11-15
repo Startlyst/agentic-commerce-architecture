@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Startlyst/agentic-commerce-architecture",
+  "title": "Startlyst Agentic Commerce MCP",
+  "description": "Self-sovereign BYOC headless commerce & agentic MCP checkout engine for B2B storefronts.",
+  "version": "1.0.0",
+  "websiteUrl": "https://startlyst.com",
+  "repository": {
+    "url": "https://github.com/Startlyst/agentic-commerce-architecture",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://startlyst.com/icon.svg",
+      "mimeType": "image/svg+xml"
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://startlyst.com/api/mcp"
+    }
+  ]
+}
