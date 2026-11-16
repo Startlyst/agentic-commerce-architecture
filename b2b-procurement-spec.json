@@ -25,7 +25,7 @@
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "a21ea59e86c8222fa7ae4cabc7607284cac475e0c345054f828820a707741cd3",
+  "merkleRootReference": "4ab47375220a0671baeccda39a9af6a80d5aead642896d0a324a07196cc8ad99",
   "enterpriseMsaGovernanceAndNonAffiliation": {
     "agileAmendmentsWithoutPriorConsent": {
       "clauseId": "SECTION_10_MSA_AND_SECTION_5_PRIVACY",
