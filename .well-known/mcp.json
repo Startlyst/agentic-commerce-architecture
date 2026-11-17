@@ -150,5 +150,38 @@
       "mimeType": "text/plain",
       "url": "https://startlyst.com/llms.txt"
     }
-  ]
+  ],
+  "aiSymbiosisGovernance": {
+    "byoAiAuthorized": true,
+    "policyTitle": "Enterprise BYO-AI & Future-Proof Symbiosis Authorized",
+    "authorizedAiEcosystems": [
+      "Claude Code",
+      "AI Coding IDEs (.cursorignore-native)",
+      "GitHub Copilot",
+      "OpenAI",
+      "Google Vertex AI",
+      "Internal Enterprise LLM",
+      "Future Next-Generation AI Agents"
+    ],
+    "cryptographicBoundary": {
+      "protectedCore": "core-engine/**",
+      "openWorkspace": "user-workspace/**",
+      "openTypedBridge": "sdk-bridge/startlyst.d.ts",
+      "governanceDocument": "AI_SYMBIOSIS_GOVERNANCE.md",
+      "aiIgnoreFiles": [".cursorignore", ".aiignore", ".copilotignore"]
+    },
+    "forwardCompatibleNegotiation": {
+      "adapterModule": "core-engine/universal-ai-symbiosis-adapter.ts",
+      "canonicalEnvelopeVersion": "startlyst.canonical-ai-symbiosis.v1",
+      "unknownFieldsPreservedIn": "extensiblePayload",
+      "supportedFutureProtocols": [
+        "mcp/2027+",
+        "a2a/vNext",
+        "openai-agent/future",
+        "custom-enterprise-llm"
+      ],
+      "cloudSyncEndpoints": ["/api/edge-feed", "/api/startlyst-engine/ai-protocol-sync"],
+      "zeroCrashFallback": true
+    }
+  }
 }
