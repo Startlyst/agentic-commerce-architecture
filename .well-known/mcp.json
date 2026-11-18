@@ -155,11 +155,11 @@
     "byoAiAuthorized": true,
     "policyTitle": "Enterprise BYO-AI & Future-Proof Symbiosis Authorized",
     "authorizedAiEcosystems": [
-      "Claude Code",
-      "AI Coding IDEs (.cursorignore-native)",
-      "GitHub Copilot",
-      "OpenAI",
-      "Google Vertex AI",
+      "Autonomous CLI Engineering Agents",
+      "Enterprise AI Coding IDEs (.aiignore-native)",
+      "CI/CD Automated Review Agents",
+      "BYO Foundation Model Gateways",
+      "Private VPC Sovereign AI Runtimes",
       "Internal Enterprise LLM",
       "Future Next-Generation AI Agents"
     ],
@@ -168,7 +168,7 @@
       "openWorkspace": "user-workspace/**",
       "openTypedBridge": "sdk-bridge/startlyst.d.ts",
       "governanceDocument": "AI_SYMBIOSIS_GOVERNANCE.md",
-      "aiIgnoreFiles": [".cursorignore", ".aiignore", ".copilotignore"]
+      "aiIgnoreFiles": [".aiignore", ".agentignore", ".llmignore"]
     },
     "forwardCompatibleNegotiation": {
       "adapterModule": "core-engine/universal-ai-symbiosis-adapter.ts",
