@@ -1,0 +1,62 @@
+STARTLYST PUBLIC SPECIFICATION & SDK BOUNDARY LICENSE
+Copyright (c) 2026 Startlyst Autonomous Systems (Startlyst Global Sovereign Operations)
+Canonical Origin: https://startlyst.com | Contact: ops@startlyst.com | Compliance: compliance@startlyst.com
+
+================================================================================
+PART 1 — PUBLIC SPECIFICATION, JSON SCHEMAS & SDK TYPE DEFINITIONS (MIT LICENSE)
+================================================================================
+
+This Part 1 applies EXCLUSIVELY to the public documentation, open benchmark
+specifications, machine-readable JSON manifests/schemas, and public TypeScript
+declaration files (`sdk-types/startlyst.d.ts`) expressly published inside this
+public repository (`Startlyst/agentic-commerce-architecture`):
+  - README.md, SECURITY.md, LICENSE
+  - server.json, mcp.json, .well-known/server.json, .well-known/mcp.json
+  - agentic-commerce-spec.json, b2b-procurement-spec.json, ai-custom-adapter.schema.json
+  - sdk-types/startlyst.d.ts
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+the Part 1 public specification files in this repository (the "Public Specs"),
+to use, copy, modify, merge, publish, and distribute copies of the Public Specs
+for integration, interoperability, procurement evaluation, and documentation
+purposes, subject to the following conditions:
+
+1. The above copyright notice and this entire two-part LICENSE notice shall be
+   included in all copies or substantial portions of the Public Specs.
+2. No trademark, brand endorsement, or misleading claim of official affiliation
+   with Startlyst is granted.
+
+THE PUBLIC SPECS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE PUBLIC SPECS OR THE USE OR OTHER DEALINGS IN THE PUBLIC SPECS.
+
+================================================================================
+PART 2 — COMMERCIAL PROPRIETARY CORE & PAID LICENSE BOUNDARY (ALL RIGHTS RESERVED)
+================================================================================
+
+NOTHING IN PART 1 OR IN THIS REPOSITORY GRANTS ANY OPEN-SOURCE, ROYALTY-FREE, OR
+REDISTRIBUTION LICENSE TO ANY STARTLYST PROPRIETARY COMMERCIAL SOFTWARE,
+INCLUDING WITHOUT LIMITATION:
+
+  - The Startlyst server-side BYOC compiler engine and synthesis pipelines
+  - Exported full-stack customer storefront templates and backend route bundles
+  - Sealed proprietary runtime modules (`core-engine/sealed-core.cjs`,
+    `core-engine/subscription-attestation-guard.ts`, CRO / Thompson Sampling
+    elasticity modules, and edge synchronization kernels)
+  - Production Cloudflare Edge routers, cryptographic license issuance/signing
+    infrastructure, and Stripe billing/underwriting automation engines
+
+Access to, execution of, and commercial deployment of compiled Startlyst BYOC
+storefront packages require an active, validly paid Startlyst Enterprise BYOC
+license issued via https://startlyst.com and governed by the Startlyst Master B2B
+Terms of Service (MSA), including:
+  - Day-1 Perpetual BYOC ownership rights for buyer-owned `/user-workspace/**`
+    assets upon valid paid fulfillment
+  - Strict prohibition on piracy, unauthorized resale/redistribution of raw
+    compiled templates or `core-engine/**` modules, reverse-engineering of sealed
+    cores, or circumvention of cryptographic license attestation
+  - Immediate cryptographic revocation (`LICENSE_REVOKED_COMPLIANCE_BREACH`) upon
+    material breach, chargeback fraud, or unlawful use (MSA Section 11)

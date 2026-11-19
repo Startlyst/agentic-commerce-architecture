@@ -3,8 +3,10 @@
   "vendor": "Startlyst",
   "organization": "Startlyst Global Sovereign Operations",
   "contactEmail": "ops@startlyst.com",
+  "securityContactEmail": "compliance@startlyst.com",
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
+  "originAttestationHeaderValue": "startlyst-sovereign-origin-v2026-verified-sha256",
   "supportedCurrencies": [
     "USD",
     "EUR",
@@ -15,13 +17,40 @@
   "stripeTaxCode": "txcd_10103001",
   "bidirectionalEndpoints": {
     "llmsManifest": "https://startlyst.com/llms.txt",
+    "llmsFullManifest": "https://startlyst.com/llms-full.txt",
+    "mcpManifest": "https://startlyst.com/.well-known/mcp.json",
+    "serverManifest": "https://startlyst.com/.well-known/server.json",
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
     "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+    "attestationManifest": "https://startlyst.com/.well-known/startlyst-attestation.json",
     "subscriptionPreferencesEndpoint": "https://startlyst.com/api/subscription/preferences",
     "renewalNoticeEndpoint": "https://startlyst.com/api/subscription/renewal-notice",
     "renewalDocumentEndpoint": "https://startlyst.com/api/subscription/renewal-document",
+    "robotsTxt": "https://startlyst.com/robots.txt",
     "sitemap": "https://startlyst.com/sitemap.xml",
-    "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
+    "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture",
+    "securityPolicy": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/SECURITY.md"
+  },
+  "customerDeliverableCapabilities": {
+    "liveMcpJsonRpcEndpoint": "/api/mcp",
+    "mcpProtocolVersion": "2025-11-25",
+    "unescapedSchemaOrgGraphJsonLd": true,
+    "crawlerDiscoveryRoutes": [
+      "/robots.txt",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt",
+      "/.well-known/mcp.json",
+      "/.well-known/server.json",
+      "/.well-known/agentic-commerce.json",
+      "/api/geo/ping"
+    ],
+    "authoritativeServerSideCheckoutPricing": true,
+    "nonDestructiveTwoLayerBoundary": {
+      "protectedBuyerLayer": "user-workspace/**",
+      "upgradableKernelLayer": "core-engine/**",
+      "verificationCommand": "npm run verify:install"
+    }
   }
 }

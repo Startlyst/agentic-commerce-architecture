@@ -3,8 +3,10 @@
   "vendor": "Startlyst",
   "organization": "Startlyst Global Sovereign Operations",
   "contactEmail": "ops@startlyst.com",
+  "securityContactEmail": "compliance@startlyst.com",
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
+  "originAttestationHeaderValue": "startlyst-sovereign-origin-v2026-verified-sha256",
   "supportedCurrencies": [
     "USD",
     "EUR",
@@ -15,17 +17,117 @@
   "stripeTaxCode": "txcd_10103001",
   "bidirectionalEndpoints": {
     "llmsManifest": "https://startlyst.com/llms.txt",
+    "llmsFullManifest": "https://startlyst.com/llms-full.txt",
+    "mcpManifest": "https://startlyst.com/.well-known/mcp.json",
+    "serverManifest": "https://startlyst.com/.well-known/server.json",
     "agenticCommerceManifest": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementManifest": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
     "aiCustomAdapterManifest": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
+    "attestationManifest": "https://startlyst.com/.well-known/startlyst-attestation.json",
     "subscriptionPreferencesEndpoint": "https://startlyst.com/api/subscription/preferences",
     "renewalNoticeEndpoint": "https://startlyst.com/api/subscription/renewal-notice",
     "renewalDocumentEndpoint": "https://startlyst.com/api/subscription/renewal-document",
+    "robotsTxt": "https://startlyst.com/robots.txt",
     "sitemap": "https://startlyst.com/sitemap.xml",
-    "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture"
+    "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture",
+    "securityPolicy": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/SECURITY.md"
+  },
+  "customerDeliverableCapabilities": {
+    "liveMcpJsonRpcEndpoint": "/api/mcp",
+    "mcpProtocolVersion": "2025-11-25",
+    "unescapedSchemaOrgGraphJsonLd": true,
+    "crawlerDiscoveryRoutes": [
+      "/robots.txt",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt",
+      "/.well-known/mcp.json",
+      "/.well-known/server.json",
+      "/.well-known/agentic-commerce.json",
+      "/api/geo/ping"
+    ],
+    "authoritativeServerSideCheckoutPricing": true,
+    "nonDestructiveTwoLayerBoundary": {
+      "protectedBuyerLayer": "user-workspace/**",
+      "upgradableKernelLayer": "core-engine/**",
+      "verificationCommand": "npm run verify:install"
+    }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "2a94106aace539b10ce261734de03d9f27854d4b894e66a216f008034d359acb",
+  "merkleRootReference": "e3ef7d0e16aff278e8f2f169360dc653491b594658134c6d93dde678f4415668",
+  "pricingMasterReference": [
+    {
+      "tier": "Tier 1: Startup Series-A",
+      "monthlySku": "startup_monthly",
+      "annualSku": "startup_annual",
+      "cohortPrefix": "stl_startup",
+      "usdMonthly": 499,
+      "usdAnnual": 4990,
+      "usdStandardMonthly": 699,
+      "usdStandardAnnual": 6990,
+      "eurMonthly": "€459/mo",
+      "eurAnnual": "€4,590/yr",
+      "gbpMonthly": "£399/mo",
+      "gbpAnnual": "£3,990/yr",
+      "chfMonthly": "CHF 439/mo",
+      "chfAnnual": "CHF 4,390/yr"
+    },
+    {
+      "tier": "Tier 2: Growth Venture",
+      "monthlySku": "growth_monthly",
+      "annualSku": "growth_annual",
+      "cohortPrefix": "stl_growth",
+      "usdMonthly": 1499,
+      "usdAnnual": 14990,
+      "usdStandardMonthly": 1999,
+      "usdStandardAnnual": 19990,
+      "eurMonthly": "€1,379/mo",
+      "eurAnnual": "€13,790/yr",
+      "gbpMonthly": "£1,189/mo",
+      "gbpAnnual": "£11,890/yr",
+      "chfMonthly": "CHF 1,319/mo",
+      "chfAnnual": "CHF 13,190/yr"
+    },
+    {
+      "tier": "Tier 3: Enterprise SIer & Agency",
+      "monthlySku": "enterprise_monthly",
+      "annualSku": "enterprise_annual",
+      "cohortPrefix": "stl_sier",
+      "usdMonthly": 4999,
+      "usdAnnual": 49990,
+      "usdStandardMonthly": 6499,
+      "usdStandardAnnual": 64990,
+      "eurMonthly": "€4,599/mo",
+      "eurAnnual": "€45,990/yr",
+      "gbpMonthly": "£3,949/mo",
+      "gbpAnnual": "£39,490/yr",
+      "chfMonthly": "CHF 4,399/mo",
+      "chfAnnual": "CHF 43,990/yr"
+    },
+    {
+      "tier": "Tier 4: Global Holding & PE Portfolio",
+      "monthlySku": "holding_monthly",
+      "annualSku": "holding_annual",
+      "cohortPrefix": "stl_holding",
+      "usdMonthly": 9999,
+      "usdAnnual": 99990,
+      "usdStandardMonthly": 12999,
+      "usdStandardAnnual": 129990,
+      "eurMonthly": "€9,199/mo",
+      "eurAnnual": "€91,990/yr",
+      "gbpMonthly": "£7,899/mo",
+      "gbpAnnual": "£78,990/yr",
+      "chfMonthly": "CHF 8,799/mo",
+      "chfAnnual": "CHF 87,990/yr"
+    }
+  ],
+  "cryptographicVerification": {
+    "archiveSha256Header": "X-Startlyst-Delivered-Zip-Sha256",
+    "packageMerkleRootHeader": "X-Startlyst-Package-Merkle-Root",
+    "localVerificationCommand": "npm run verify:install",
+    "attestationEndpoint": "https://startlyst.com/.well-known/startlyst-attestation.json",
+    "nonDestructiveUserWorkspaceBytesMutated": 0
+  },
   "enterpriseMsaGovernanceAndNonAffiliation": {
     "agileAmendmentsWithoutPriorConsent": {
       "clauseId": "SECTION_10_MSA_AND_SECTION_5_PRIVACY",

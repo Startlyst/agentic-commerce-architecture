@@ -43,7 +43,9 @@
     "agenticCommerceSpec": "https://startlyst.com/.well-known/agentic-commerce.json",
     "b2bProcurementSpec": "https://startlyst.com/.well-known/startlyst-b2b-procurement.json",
     "aiCustomAdapterSchema": "https://startlyst.com/.well-known/ai-custom-adapter.schema.json",
-    "llmsTxt": "https://startlyst.com/llms.txt"
+    "attestationManifest": "https://startlyst.com/.well-known/startlyst-attestation.json",
+    "llmsTxt": "https://startlyst.com/llms.txt",
+    "llmsFullTxt": "https://startlyst.com/llms-full.txt"
   },
   "mcpServers": {
     "startlyst-agentic-commerce": {
@@ -149,6 +151,12 @@
       "name": "Startlyst LLMs Context & Architecture Summary",
       "mimeType": "text/plain",
       "url": "https://startlyst.com/llms.txt"
+    },
+    {
+      "uri": "startlyst://docs/llms-full",
+      "name": "Startlyst Complete Long-Context Architecture, Pricing & Protocol Specification",
+      "mimeType": "text/plain",
+      "url": "https://startlyst.com/llms-full.txt"
     }
   ],
   "aiSymbiosisGovernance": {
