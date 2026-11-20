@@ -20,14 +20,14 @@ All proprietary server-side compiler engines, full-stack customer templates, Bay
 
 ## 2. Multi-Currency Tax-Exclusive Enterprise Licensing (`txcd_10103001` · `JP_EXPORT_EXEMPT_0_PCT`)
 
-All 8 production Stripe Checkout SKUs match the canonical billing master (`Monthly` / `Annual Prepay — 2 Months Free`, tax-exclusive). Corporate Partner / Referral rates reflect the live Stripe Checkout schedule alongside Standard List rates:
+All 8 production Stripe Checkout SKUs match the canonical billing master (`Monthly` / `Annual Prepay — 2 Months Free`, tax-exclusive). Stripe Checkout settles in USD; EUR, GBP, and CHF figures represent indicative B2B equivalents:
 
-| Tier | Production SKUs (Monthly / Annual) | USD Live Stripe Rate (Tax-Exclusive) | USD Standard List | EUR (B2B Reverse-Charge) | GBP (UK Reverse-Charge) | CHF (Swiss B2B) |
+| Tier | Production SKUs (Monthly / Annual) | USD Live Stripe Rate (Tax-Exclusive) | USD Standard List Reference | EUR (Indicative Ex-VAT) | GBP (Indicative Ex-VAT) | CHF (Indicative Ex-VAT) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Tier 1: Startup Series-A** | `startup_monthly` / `startup_annual` | `$499/mo` (`$4,990/yr`) | `$699/mo` (`$6,990/yr`) | `€459/mo` (`€4,590/yr`) | `£399/mo` (`£3,990/yr`) | `CHF 439/mo` (`CHF 4,390/yr`) |
-| **Tier 2: Growth Venture** | `growth_monthly` / `growth_annual` | `$1,499/mo` (`$14,990/yr`) | `$1,999/mo` (`$19,990/yr`) | `€1,379/mo` (`€13,790/yr`) | `£1,189/mo` (`£11,890/yr`) | `CHF 1,319/mo` (`CHF 13,190/yr`) |
-| **Tier 3: Enterprise SIer & Agency** | `enterprise_monthly` / `enterprise_annual` | `$4,999/mo` (`$49,990/yr`) | `$6,499/mo` (`$64,990/yr`) | `€4,599/mo` (`€45,990/yr`) | `£3,949/mo` (`£39,490/yr`) | `CHF 4,399/mo` (`CHF 43,990/yr`) |
-| **Tier 4: Global Holding & PE Portfolio** | `holding_monthly` / `holding_annual` | `$9,999/mo` (`$99,990/yr`) | `$12,999/mo` (`$129,990/yr`) | `€9,199/mo` (`€91,990/yr`) | `£7,899/mo` (`£78,990/yr`) | `CHF 8,799/mo` (`CHF 87,990/yr`) |
+| **Tier 1: Startup Series-A** | `startup_monthly` / `startup_annual` | `$499/mo` (`$4,990/yr`) · Save `$998`/yr | `$699/mo` (`$6,990/yr`) | `€459/mo` (`€4,590/yr`) | `£399/mo` (`£3,990/yr`) | `CHF 439/mo` (`CHF 4,390/yr`) |
+| **Tier 2: Growth Venture** | `growth_monthly` / `growth_annual` | `$1,499/mo` (`$14,990/yr`) · Save `$2,998`/yr | `$1,999/mo` (`$19,990/yr`) | `€1,379/mo` (`€13,790/yr`) | `£1,189/mo` (`£11,890/yr`) | `CHF 1,319/mo` (`CHF 13,190/yr`) |
+| **Tier 3: Enterprise SIer & Agency** | `enterprise_monthly` / `enterprise_annual` | `$4,999/mo` (`$49,990/yr`) · Save `$9,998`/yr | `$6,499/mo` (`$64,990/yr`) | `€4,599/mo` (`€45,990/yr`) | `£3,949/mo` (`£39,490/yr`) | `CHF 4,399/mo` (`CHF 43,990/yr`) |
+| **Tier 4: Global Holding & PE Portfolio** | `holding_monthly` / `holding_annual` | `$9,999/mo` (`$99,990/yr`) · Save `$19,998`/yr | `$12,999/mo` (`$129,990/yr`) | `€9,199/mo` (`€91,990/yr`) | `£7,899/mo` (`£78,990/yr`) | `CHF 8,799/mo` (`CHF 87,990/yr`) |
 
 ---
 
