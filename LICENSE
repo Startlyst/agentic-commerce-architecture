@@ -44,8 +44,8 @@ INCLUDING WITHOUT LIMITATION:
   - The Startlyst server-side BYOC compiler engine and synthesis pipelines
   - Exported full-stack customer storefront templates and backend route bundles
   - Sealed proprietary runtime modules (`core-engine/sealed-core.cjs`,
-    `core-engine/subscription-attestation-guard.ts`, CRO / Thompson Sampling
-    elasticity modules, and edge synchronization kernels)
+    `core-engine/subscription-attestation-guard.ts`, server-side experimentation
+    policies, and edge synchronization kernels)
   - Production Cloudflare Edge routers, cryptographic license issuance/signing
     infrastructure, and Stripe billing/underwriting automation engines
 

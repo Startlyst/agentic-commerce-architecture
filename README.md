@@ -14,7 +14,7 @@
 ## 1. Overview & Public vs. Commercial Boundary
 This public repository publishes the machine-readable architecture specifications, multi-currency B2B pricing schemas (`USD`, `EUR`, `GBP`, `CHF`), MCP / Agentic Commerce discovery manifests, cryptographic verification procedures, and public TypeScript Headless SDK interface declarations (`useStartlystCommerce()`) for **Startlyst**.
 
-All proprietary server-side compiler engines, full-stack customer templates, Bayesian Thompson Sampling elasticity priors, billing/signing infrastructure, and sealed execution cores (`core-engine/sealed-core.cjs`) remain strictly isolated inside the private commercial release. See [`LICENSE`](./LICENSE) for exact licensing boundaries and [`SECURITY.md`](./SECURITY.md) for responsible vulnerability disclosure.
+All proprietary server-side compiler engines, full-stack customer templates, server-side optimization policies, billing/signing infrastructure, and sealed execution cores (`core-engine/sealed-core.cjs`) remain strictly isolated inside the private commercial release. See [`LICENSE`](./LICENSE) for exact licensing boundaries and [`SECURITY.md`](./SECURITY.md) for responsible vulnerability disclosure.
 
 ---
 
