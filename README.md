@@ -29,6 +29,17 @@ All 8 production Stripe Checkout SKUs match the canonical billing master (`Month
 | **Tier 3: Enterprise SIer & Agency** | `enterprise_monthly` / `enterprise_annual` | `$4,999/mo` (`$49,990/yr`) · Save `$9,998`/yr | `$6,499/mo` (`$64,990/yr`) | `€4,599/mo` (`€45,990/yr`) | `£3,949/mo` (`£39,490/yr`) | `CHF 4,399/mo` (`CHF 43,990/yr`) |
 | **Tier 4: Global Holding & PE Portfolio** | `holding_monthly` / `holding_annual` | `$9,999/mo` (`$99,990/yr`) · Save `$19,998`/yr | `$12,999/mo` (`$129,990/yr`) | `€9,199/mo` (`€91,990/yr`) | `£7,899/mo` (`£78,990/yr`) | `CHF 8,799/mo` (`CHF 87,990/yr`) |
 
+### 2.1 Four-Tier Architecture & Deliverable Matrix (Zero Unwired Stubs)
+
+| Tier | Shipped Files (Monthly / Annual) | Database & Scaling Layer | Auth, RBAC & Tenant Isolation | Observability & Operational Probes |
+| :--- | :---: | :--- | :--- | :--- |
+| **Tier 1: Startup Series-A** | `148` / `155` | SQLite WAL (`node:sqlite`) & Cloudflare D1 (`DATABASE_DRIVER=sqlite\|d1`), bounded in-memory sliding-window rate limiter | Fail-closed `ADMIN_LEDGER_TOKEN` constant-time auth + RFC 2104 `HMAC-SHA256` audit chain | PII-masked structured JSON logger, W3C `traceparent`, K8s `/api/healthz` & `/api/readyz`, Prometheus/JSON `/api/admin/metrics`, opt-in OTLP (OFF by default) |
+| **Tier 2: Growth Venture** | `150` / `157` | All Startup + **Distributed Redis / Upstash REST** sliding-window rate limit & cache (`src/lib/distributed-store.ts`, auto memory fallback) | **4-Role RBAC** (`owner` / `admin` / `auditor` / `operator` in `src/lib/enterprise-rbac.ts`) + chained HMAC audit records | All Startup + RBAC decision & distributed rate-limit telemetry |
+| **Tier 3: Enterprise SIer** | `157` / `164` | All Growth + **PostgreSQL Primary/Read-Replica Adapter** (`src/lib/postgres-adapter.ts`) & `schema.postgres.sql` with `ENABLE/FORCE ROW LEVEL SECURITY` | **Web Crypto OIDC JWT/JWKS SSO** (`RS256` / `ES256` / `EdDSA`; SAML 2.0 via OIDC IdP bridge in `OIDC_SSO_SAML_BRIDGE_GUIDE.md`) + `src/lib/tenant-isolation.ts` | All Growth + RBAC-protected `GET /api/admin/audit` live hash-chain verification |
+| **Tier 4: Global Holding** | `159` / `166` | All Enterprise + Unlimited multi-subsidiary deployments | All Enterprise + **Multi-Subsidiary Tenant Governance API** (`GET/POST /api/admin/tenants`) & `holding-portfolio-governance.json` | All Enterprise + cross-tenant boundary denial audit trail |
+
+*(Annual Prepay on any tier adds `+7` Annual Vault artifacts including live-wired `seasonal-vault.ts`, cent-exact `currency-router.ts`, `recovery-bank-52w.json`, and `CERTIFICATE_OF_PERPETUAL_IP.md`. All tiers ship zero-third-party-egress by default: local SVG assets, Photon OFF, OTLP OFF.)*
+
 ---
 
 ## 3. Customer Deliverable (Exported BYOC Storefront ZIP) — Live AI, Search & MCP Capabilities
