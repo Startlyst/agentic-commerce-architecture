@@ -1,6 +1,7 @@
 # Startlyst — Self-Sovereign (BYOC) Deterministic Full-Stack & Agentic Commerce Engine (Public Architecture & Verification Specification)
 
 > **Canonical Production Engine**: [https://startlyst.com](https://startlyst.com)  
+> **AI Customization Blueprint (`$0` UI Redesign Flow)**: [`AI_CUSTOMIZATION_BLUEPRINT.md`](./AI_CUSTOMIZATION_BLUEPRINT.md)  
 > **Verified Benchmarks & Reproduction Disclosure**: [`BENCHMARKS.md`](./BENCHMARKS.md)  
 > **AI Citation Summary (`/llms.txt`)**: [https://startlyst.com/llms.txt](https://startlyst.com/llms.txt)  
 > **AI Full Long-Context Specification (`/llms-full.txt`)**: [https://startlyst.com/llms-full.txt](https://startlyst.com/llms-full.txt)  
@@ -12,17 +13,26 @@
 
 ---
 
-## 1. Why Startlyst Exists & Auditable Economic Case
+## 1. Design Philosophy, Why Startlyst Exists & Auditable Economic Case
 
 Modern commerce teams face an artificial trade-off:
-- **Hosted SaaS & Monolithic Carts** impose recurring platform fees, fragmented paid plugin sprawl, GMV take-rates, shared third-party data custody, and sudden service termination upon cancellation.
+- **Legacy SaaS Commerce Platforms & Monolithic Carts** impose recurring platform fees, fragmented paid plugin sprawl, GMV take-rates, shared third-party data custody, and sudden service termination upon cancellation.
 - **Building from Scratch** requires months of senior-engineer architecture, security hardening, payment webhook replay defense, rate-limit tuning, multi-tenant database RLS, OIDC/RBAC governance, and load testing before shipping a single SKU.
 
-Startlyst solves this with a deterministic **Bring-Your-Own-Cloud (BYOC)** full-stack commerce compiler. Rather than relying on unverifiable revenue guarantees, the business case for licensing Startlyst rests on **three auditable economic mechanisms**:
+Startlyst solves this with a deterministic **Bring-Your-Own-Cloud (BYOC)** full-stack commerce compiler built around **three explicit operating pillars**:
 
-1. **Build-vs-Buy Engineering Effort Compression**: Every licensed archive delivers **`149–168` live-wired, production-hardened files** verified across 18 automated test suites that pass Day-1 6-step onboarding (`EXIT=0`, `next build` **`1.89s`**, **`112 kB`** First Load JS). Replacing 3–6+ engineer-months of bespoke commerce, security, RBAC/OIDC, PostgreSQL RLS, and MCP engineering yields immediate, calculable capex/opex payback before a single ad dollar is spent.
-2. **Zero GMV Tax & Zero Vendor Lock-In**: Startlyst charges **0% GMV commission** regardless of revenue scale. Deployed storefronts execute inside the buyer's own cloud (Cloudflare, Vercel, AWS, Docker/Kubernetes), sustain **`100% HTTP 200`** (`P99 0.01–0.07 ms`) even if `startlyst.com` is unreachable, returning `503`, or hanging, emit **0 default third-party outbound requests**, and continue permanently in `static_frozen_mode` if a subscription ends without refund.
-3. **Immediate Agentic Commerce & Ongoing Security Posture**: Every licensed build wires live MCP JSON-RPC 2.0 (`/api/mcp`), unescaped Schema.org `@graph` JSON-LD, `/llms.txt` / `/llms-full.txt`, and `/.well-known/*` discovery out of the box, paired with ongoing **Web Crypto Ed25519-signed non-destructive security patches** (`0` protected bytes mutated).
+- **Pillar 1 — Zero-Touch Self-Service Operating Model**: Startlyst is a pure self-service deterministic software compiler delivering a verified Sovereign BYOC Core (**`150–169` live-wired files**). No human support desk, bespoke onboarding consulting, account managers, or manual support tickets are bundled; As-Is B2B licensing (`UCC § 2-316`), automated **Web Crypto Ed25519** security patches, non-destructive `--upgrade-from-zip` upgrades, and self-diagnostic CLI tools (`npm run startlyst:doctor -- --json` & `node verify-installation.mjs`) eliminate human support overhead structurally.
+- **Pillar 2 — AI-Native Ownership & `$0` UI Freedom**: Every licensed ZIP bundles root **`AI_AGENT_HANDOFF.md`** so **your own AI coding agent**, **internal LLM**, or **MCP-compatible coding assistant** executes the concrete 3-step launch & redesign flow inside your own environment:
+  1. **Unzip & Hand Off `AI_AGENT_HANDOFF.md`**: Load `AI_AGENT_HANDOFF.md` into your own AI coding agent (`.aiignore` / `.agentignore` / `.llmignore` shield `core-engine/**` while opening `user-workspace/**`, `src/components/**`, and `sdk-bridge/startlyst.d.ts`).
+  2. **Day-1 6-Step Launch (`1.89s` Build)**: Run `verify-installation.mjs` -> `npm install` -> `npm run setup` -> `startlyst:doctor` -> `npm run build` (`1.89s`, `112 kB` First Load JS) -> post-build verification, then deploy into your chosen cloud region (**US Virginia**, **EU Frankfurt**, **UK London**, **Switzerland Zurich**, or **Australia Sydney**).
+  3. **Full From-Scratch UI Redesign at `$0` Extra Cost**: Redesign 100% of `user-workspace/**`, `src/components/**`, and `src/app/globals.css` at `$0` extra license fee and `0%` GMV cut, with **`0` protected bytes mutated** on future Ed25519 security patches or `--upgrade-from-zip` upgrades. See [`AI_CUSTOMIZATION_BLUEPRINT.md`](./AI_CUSTOMIZATION_BLUEPRINT.md).
+- **Pillar 3 — Automated Tax & Legal Boundary Clarity**: Stripe Hosted Checkout + Stripe Tax (`txcd_10103001`, `tax_behavior: exclusive`, mandatory `tax_id_collection: enabled`) calculates cross-border B2B taxes (US Sales Tax, EU VAT Reverse Charge `2006/112/EC Art. 196`, UK VAT, CH VAT, Australian GST/ABN) without cardholder credentials ever touching Startlyst servers. Under our BYOC shared-responsibility model, final statutory tax filings and cloud operations strictly belong to the buyer and payment processor.
+
+Rather than relying on unverifiable revenue guarantees, the business case for licensing Startlyst rests on **three auditable economic mechanisms**:
+
+1. **Build-vs-Buy Engineering Effort Compression**: Every licensed archive delivers **`150–169` live-wired, production-hardened files** (including root `AI_AGENT_HANDOFF.md`) verified across 18 automated test suites that pass Day-1 6-step onboarding (`EXIT=0`, `next build` **`1.89s`**, **`112 kB`** First Load JS). Replacing 3–6+ engineer-months of bespoke commerce, security, RBAC/OIDC, PostgreSQL RLS, and MCP engineering yields immediate, calculable capex/opex payback before a single ad dollar is spent.
+2. **Zero GMV Tax & Zero Vendor Lock-In**: Startlyst charges **0% GMV commission** regardless of revenue scale. Deployed storefronts execute inside the buyer's own cloud (US Virginia, EU Frankfurt, UK London, CH Zurich, AU Sydney on Cloudflare, Vercel, AWS, Docker/Kubernetes), sustain **`100% HTTP 200`** (`P99 0.01–0.07 ms`) even if `startlyst.com` is unreachable, returning `503`, or hanging, emit **0 default third-party outbound requests**, and continue permanently in `static_frozen_mode` if a subscription ends without refund.
+3. **Immediate Agentic Commerce & Autonomous AI Evaluation**: Every licensed build wires live MCP JSON-RPC 2.0 (`/api/mcp`), unescaped Schema.org `@graph` JSON-LD, `/llms.txt` / `/llms-full.txt`, and `/.well-known/*` discovery out of the box, paired with ongoing **Web Crypto Ed25519-signed non-destructive security patches** (`0` protected bytes mutated). External AI procurement agents can evaluate Startlyst directly via read-only `POST https://startlyst.com/api/mcp` (`evaluate_architecture_fit`, `get_ai_customization_blueprint`, `get_verified_benchmarks`, `get_procurement_checkout_path`, `get_storefront_catalog`, `evaluate_b2b_procurement_tco`, `get_omni_device_adapter_spec`, `verify_legal_and_security_posture`).
 
 ---
 
@@ -47,9 +57,10 @@ See [`BENCHMARKS.md`](./BENCHMARKS.md) for the complete 10-second interval telem
 
 This public repository discloses open specifications, pricing schemas, TypeScript SDK declarations, and verifiable benchmark evidence. **Zero proprietary compiler logic, secret keys, or private runtime implementations reside here.**
 
-| Capability / Asset | Public Showcase Repo (Free to Audit) | Licensed Commercial BYOC ZIP (`149–168` Files) |
+| Capability / Asset | Public Showcase Repo (Free to Audit) | Licensed Commercial BYOC ZIP (`150–169` Files) |
 | :--- | :---: | :---: |
-| **Multi-Currency B2B Pricing & Tax Specs (`USD`/`EUR`/`GBP`/`CHF`)** | Open JSON & Markdown | Canonical Stripe Checkout & fulfillment integration |
+| **Multi-Currency B2B Pricing & Tax Specs (`USD`/`EUR`/`GBP`/`CHF` + US/EU/UK/CH/AU Coverage)** | Open JSON & Markdown | Canonical Stripe Checkout & fulfillment integration |
+| **AI Handoff & Customization Blueprint (`AI_AGENT_HANDOFF.md`)** | Public preview ([`AI_CUSTOMIZATION_BLUEPRINT.md`](./AI_CUSTOMIZATION_BLUEPRINT.md)) | Tier-tailored root `AI_AGENT_HANDOFF.md` + `.aiignore` + `startlyst:doctor` |
 | **MCP / ACP / UCP / B2B Procurement Schemas & `startlyst.d.ts`** | Open interface contracts | Live compiled `/api/mcp` JSON-RPC 2.0 server, `/api/checkout`, `/api/agent-checkout`, `/api/startlyst-engine/*` |
 | **Benchmark Telemetry & Architectural Boundary Disclosure** | Complete [`BENCHMARKS.md`](./BENCHMARKS.md) | Reproducible locally via `npm run build`, `verify-installation.mjs`, `startlyst:doctor` |
 | **O(1) Rate Limiter (`4,003.6 RPS` / `351.27 MB` RSS) & Hardened Checkout** | Not included | Full source code pre-wired across all 4 tiers |
@@ -58,9 +69,9 @@ This public repository discloses open specifications, pricing schemas, TypeScrip
 
 ---
 
-## 4. Multi-Currency Tax-Exclusive Enterprise Licensing (`txcd_10103001` · `JP_EXPORT_EXEMPT_0_PCT`)
+## 4. Multi-Currency Tax-Exclusive Enterprise Licensing (`txcd_10103001` · Automated Cross-Border B2B Tax)
 
-All 8 production Stripe Checkout SKUs match the canonical billing master (`Monthly` / `Annual Prepay — 2 Months Free`, tax-exclusive). Stripe Checkout settles in USD; EUR, GBP, and CHF figures represent indicative B2B equivalents:
+All 8 production Stripe Checkout SKUs match the canonical billing master (`Monthly` / `Annual Prepay — 2 Months Free`, tax-exclusive). Stripe Checkout settles in USD across **United States, European Union, United Kingdom, Switzerland, Australia / ANZ, and Global English-speaking B2B markets** with automatic Stripe Tax evaluation (`txcd_10103001`, `tax_behavior: exclusive`); EUR, GBP, and CHF figures represent indicative B2B equivalents:
 
 | Tier | Production SKUs (Monthly / Annual) | USD Live Stripe Rate (Tax-Exclusive) | USD Standard List Reference | EUR (Indicative Ex-VAT) | GBP (Indicative Ex-VAT) | CHF (Indicative Ex-VAT) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -73,10 +84,10 @@ All 8 production Stripe Checkout SKUs match the canonical billing master (`Month
 
 | Tier | Shipped Files (Monthly / Annual) | Database, Migrations & Scaling Layer | Auth, RBAC & Tenant Isolation | Observability & Operational Probes |
 | :--- | :---: | :--- | :--- | :--- |
-| **Tier 1: Startup Series-A** | `149` / `156` | SQLite WAL (`node:sqlite`) & Cloudflare D1 (`DATABASE_DRIVER=sqlite\|d1`), `migrations/upgrade-additive-sqlite.sql`, O(1) bounded sliding-window rate limiter | Fail-closed `ADMIN_LEDGER_TOKEN` constant-time auth + RFC 2104 `HMAC-SHA256` audit chain | PII-masked structured JSON logger, W3C `traceparent`, K8s `/api/healthz` & `/api/readyz`, Prometheus/JSON `/api/admin/metrics`, opt-in OTLP (OFF by default) |
-| **Tier 2: Growth Venture** | `151` / `158` | All Startup + **Distributed Redis / Upstash REST** sliding-window rate limit & cache (`src/lib/distributed-store.ts`, auto O(1) memory fallback) | **4-Role RBAC** (`owner` / `admin` / `auditor` / `operator` in `src/lib/enterprise-rbac.ts`) + chained HMAC audit records | All Startup + RBAC decision & distributed rate-limit telemetry |
-| **Tier 3: Enterprise SIer** | `159` / `166` | All Growth + **PostgreSQL Primary/Read-Replica Adapter** (`src/lib/postgres-adapter.ts`), `schema.postgres.sql` (`FORCE RLS`) & `migrations/upgrade-additive-postgres.sql` | **Web Crypto OIDC JWT/JWKS SSO** (`RS256` / `ES256` / `EdDSA`; SAML 2.0 via OIDC IdP bridge in `OIDC_SSO_SAML_BRIDGE_GUIDE.md`) + `src/lib/tenant-isolation.ts` | All Growth + RBAC-protected `GET /api/admin/audit` live hash-chain verification |
-| **Tier 4: Global Holding** | `161` / `168` | All Enterprise + Unlimited multi-subsidiary deployments | All Enterprise + **Multi-Subsidiary Tenant Governance API** (`GET/POST /api/admin/tenants`) & `holding-portfolio-governance.json` | All Enterprise + cross-tenant boundary denial audit trail |
+| **Tier 1: Startup Series-A** | `150` / `157` | Root `AI_AGENT_HANDOFF.md`, SQLite WAL (`node:sqlite`) & Cloudflare D1 (`DATABASE_DRIVER=sqlite\|d1`), `migrations/upgrade-additive-sqlite.sql`, O(1) bounded sliding-window rate limiter | Fail-closed `ADMIN_LEDGER_TOKEN` constant-time auth + RFC 2104 `HMAC-SHA256` audit chain | PII-masked structured JSON logger, W3C `traceparent`, K8s `/api/healthz` & `/api/readyz`, Prometheus/JSON `/api/admin/metrics`, opt-in OTLP (OFF by default) |
+| **Tier 2: Growth Venture** | `152` / `159` | All Startup + **Distributed Redis / Upstash REST** sliding-window rate limit & cache (`src/lib/distributed-store.ts`, auto O(1) memory fallback) | **4-Role RBAC** (`owner` / `admin` / `auditor` / `operator` in `src/lib/enterprise-rbac.ts`) + chained HMAC audit records | All Startup + RBAC decision & distributed rate-limit telemetry |
+| **Tier 3: Enterprise SIer** | `160` / `167` | All Growth + **PostgreSQL Primary/Read-Replica Adapter** (`src/lib/postgres-adapter.ts`), `schema.postgres.sql` (`FORCE RLS`) & `migrations/upgrade-additive-postgres.sql` | **Web Crypto OIDC JWT/JWKS SSO** (`RS256` / `ES256` / `EdDSA`; SAML 2.0 via OIDC IdP bridge in `OIDC_SSO_SAML_BRIDGE_GUIDE.md`) + `src/lib/tenant-isolation.ts` | All Growth + RBAC-protected `GET /api/admin/audit` live hash-chain verification |
+| **Tier 4: Global Holding** | `162` / `169` | All Enterprise + Unlimited multi-subsidiary deployments | All Enterprise + **Multi-Subsidiary Tenant Governance API** (`GET/POST /api/admin/tenants`) & `holding-portfolio-governance.json` | All Enterprise + cross-tenant boundary denial audit trail |
 
 *(Annual Prepay on any tier adds `+7` Annual Vault artifacts including live-wired `seasonal-vault.ts`, cent-exact `currency-router.ts`, `recovery-bank-52w.json`, and `CERTIFICATE_OF_PERPETUAL_IP.md`. All tiers ship zero-third-party-egress by default: 5 local SVG assets, Photon OFF, OTLP OFF.)*
 
@@ -107,11 +118,12 @@ curl -sS https://startlyst.com/.well-known/startlyst-attestation.json
 ---
 
 ## 6. Included Open Specification Artifacts
+- [`AI_CUSTOMIZATION_BLUEPRINT.md`](./AI_CUSTOMIZATION_BLUEPRINT.md): Pre-purchase guide to the Zero-Touch Self-Service model, root `AI_AGENT_HANDOFF.md`, writable UI vs. protected core boundaries, and `$0` UI redesign workflow via your own AI coding agent.
 - [`BENCHMARKS.md`](./BENCHMARKS.md): Complete verified performance benchmarks, 60s sustained telemetry, reproduction guide, and candid BYOC boundaries.
 - [`SECURITY.md`](./SECURITY.md): Responsible vulnerability disclosure policy, response SLA, Ed25519 patch protocol, and security posture.
 - [`LICENSE`](./LICENSE): Clear separation between open specification/type-definition licensing and the commercial proprietary core.
 - [`server.json`](./server.json): Official MCP Registry manifest (`2025-12-11/server.schema.json`).
-- [`mcp.json`](./mcp.json): MCP Server Card, client connection config, tools, and resources manifest (`/.well-known/mcp.json`).
+- [`mcp.json`](./mcp.json): MCP Server Card, client connection config, all 8 read-only evaluation tools, and resources manifest (`/.well-known/mcp.json`).
 - [`agentic-commerce-spec.json`](./agentic-commerce-spec.json): Open schema for ACP/UCP/MCP shopping agents.
 - [`b2b-procurement-spec.json`](./b2b-procurement-spec.json): Enterprise CTO/CMO/CFO procurement verification manifest and pricing reference.
 - [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json): Universal Omni-Device & Non-Destructive Customization Manifest.

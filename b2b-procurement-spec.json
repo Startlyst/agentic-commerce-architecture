@@ -7,6 +7,23 @@
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
   "originAttestationHeaderValue": "startlyst-sovereign-origin-v2026-verified-sha256",
+  "areaServed": [
+    "US",
+    "GB",
+    "DE",
+    "FR",
+    "NL",
+    "SE",
+    "CH",
+    "IE",
+    "ES",
+    "IT",
+    "AU",
+    "NZ",
+    "CA",
+    "SG",
+    "JP"
+  ],
   "supportedCurrencies": [
     "USD",
     "EUR",
@@ -15,6 +32,22 @@
   ],
   "taxBehavior": "exclusive",
   "stripeTaxCode": "txcd_10103001",
+  "operatingModel": {
+    "zeroTouchSelfService": true,
+    "noHumanSupportDesk": true,
+    "additionalUiRedesignFeeUsd": 0,
+    "customerZipAiHandoffFile": "AI_AGENT_HANDOFF.md",
+    "autonomousMcpSalesTools": [
+      "evaluate_architecture_fit",
+      "get_ai_customization_blueprint",
+      "get_verified_benchmarks",
+      "get_procurement_checkout_path",
+      "get_storefront_catalog",
+      "evaluate_b2b_procurement_tco",
+      "get_omni_device_adapter_spec",
+      "verify_legal_and_security_posture"
+    ]
+  },
   "bidirectionalEndpoints": {
     "llmsManifest": "https://startlyst.com/llms.txt",
     "llmsFullManifest": "https://startlyst.com/llms-full.txt",
@@ -31,7 +64,8 @@
     "sitemap": "https://startlyst.com/sitemap.xml",
     "githubShowcase": "https://github.com/Startlyst/agentic-commerce-architecture",
     "securityPolicy": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/SECURITY.md",
-    "benchmarksDocument": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/BENCHMARKS.md"
+    "benchmarksDocument": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/BENCHMARKS.md",
+    "aiCustomizationBlueprint": "https://github.com/Startlyst/agentic-commerce-architecture/blob/main/AI_CUSTOMIZATION_BLUEPRINT.md"
   },
   "customerDeliverableCapabilities": {
     "liveMcpJsonRpcEndpoint": "/api/mcp",
@@ -76,25 +110,25 @@
     "brownfieldProtectedBytesMutated": 0,
     "tierDeliverableFileCounts": {
       "startup": {
-        "monthly": 149,
-        "annual": 156
+        "monthly": 150,
+        "annual": 157
       },
       "growth": {
-        "monthly": 151,
-        "annual": 158
+        "monthly": 152,
+        "annual": 159
       },
       "enterprise": {
-        "monthly": 159,
-        "annual": 166
+        "monthly": 160,
+        "annual": 167
       },
       "holding": {
-        "monthly": 161,
-        "annual": 168
+        "monthly": 162,
+        "annual": 169
       }
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "ba00359ca159ff8c4daeb28a82458f43e0b3666cac8d63aaf642da584efa6665",
+  "merkleRootReference": "711e158bbc52afcffa7c61784e8e1cf5d2daa3ff8d151e0c09c017fe2c359693",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",

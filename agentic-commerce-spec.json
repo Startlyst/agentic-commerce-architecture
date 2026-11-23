@@ -7,6 +7,23 @@
   "canonicalOrigin": "https://startlyst.com",
   "originAttestationHeader": "X-Startlyst-Origin-Attestation",
   "originAttestationHeaderValue": "startlyst-sovereign-origin-v2026-verified-sha256",
+  "areaServed": [
+    "US",
+    "GB",
+    "DE",
+    "FR",
+    "NL",
+    "SE",
+    "CH",
+    "IE",
+    "ES",
+    "IT",
+    "AU",
+    "NZ",
+    "CA",
+    "SG",
+    "JP"
+  ],
   "supportedCurrencies": [
     "USD",
     "EUR",
@@ -15,6 +32,22 @@
   ],
   "taxBehavior": "exclusive",
   "stripeTaxCode": "txcd_10103001",
+  "operatingModel": {
+    "zeroTouchSelfService": true,
+    "noHumanSupportDesk": true,
+    "additionalUiRedesignFeeUsd": 0,
+    "customerZipAiHandoffFile": "AI_AGENT_HANDOFF.md",
+    "autonomousMcpSalesTools": [
+      "evaluate_architecture_fit",
+      "get_ai_customization_blueprint",
+      "get_verified_benchmarks",
+      "get_procurement_checkout_path",
+      "get_storefront_catalog",
+      "evaluate_b2b_procurement_tco",
+      "get_omni_device_adapter_spec",
+      "verify_legal_and_security_posture"
+    ]
+  },
   "bidirectionalEndpoints": {
     "llmsManifest": "https://startlyst.com/llms.txt",
     "llmsFullManifest": "https://startlyst.com/llms-full.txt",

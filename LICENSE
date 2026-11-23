@@ -10,7 +10,7 @@ This Part 1 applies EXCLUSIVELY to the public documentation, open benchmark
 specifications, machine-readable JSON manifests/schemas, and public TypeScript
 declaration files (`sdk-types/startlyst.d.ts`) expressly published inside this
 public repository (`Startlyst/agentic-commerce-architecture`):
-  - README.md, SECURITY.md, LICENSE
+  - README.md, BENCHMARKS.md, AI_CUSTOMIZATION_BLUEPRINT.md, SECURITY.md, LICENSE
   - server.json, mcp.json, .well-known/server.json, .well-known/mcp.json
   - agentic-commerce-spec.json, b2b-procurement-spec.json, ai-custom-adapter.schema.json
   - sdk-types/startlyst.d.ts

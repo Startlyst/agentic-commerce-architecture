@@ -119,6 +119,121 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "evaluate_architecture_fit",
+      "description": "Deterministically recommend the optimal Startlyst BYOC tier (Startup to Holding) with verified engineering specs, transparent assumption-based TCO vs legacy SaaS commerce platforms (0% GMV tax), and region-specific tax/payment/data-residency guidance for US, EU, UK, CH, AU, or GLOBAL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string",
+            "enum": ["US", "EU", "UK", "CH", "AU", "GLOBAL"],
+            "default": "GLOBAL"
+          },
+          "annualGmvUsd": {
+            "type": "number",
+            "minimum": 0,
+            "default": 5000000
+          },
+          "storeCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 1
+          },
+          "needsPostgresRls": {
+            "type": "boolean",
+            "default": false
+          },
+          "needsOidcSso": {
+            "type": "boolean",
+            "default": false
+          },
+          "needsMultiSubsidiaryGovernance": {
+            "type": "boolean",
+            "default": false
+          },
+          "needsDistributedRedis": {
+            "type": "boolean",
+            "default": false
+          },
+          "billingCyclePreference": {
+            "type": "string",
+            "enum": ["annual", "monthly"],
+            "default": "annual"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_ai_customization_blueprint",
+      "description": "Return structured post-purchase instructions for deploying and completely redesigning the storefront UI from scratch ($0 extra license fee) using your own AI coding agent, internal LLM, or MCP-compatible coding assistant via root AI_AGENT_HANDOFF.md and protected 2-layer boundaries.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": ["startup", "growth", "enterprise", "holding"],
+            "default": "growth"
+          },
+          "adapterMode": {
+            "type": "string",
+            "enum": ["standalone", "subpath", "headless"],
+            "default": "standalone"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_verified_benchmarks",
+      "description": "Return empirically measured engineering benchmarks (112 kB First Load JS, 1.89s build, 4,003.6 RPS, 351.27 MB Peak RSS, 392,354.7 QPS SQLite WAL, 0.00% SQLITE_BUSY, 0 default egress), reproduction conditions, and candid BYOC shared-responsibility boundaries.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["all", "build", "load", "database", "autonomy", "upgrades", "boundaries"],
+            "default": "all"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_procurement_checkout_path",
+      "description": "Return exact live Stripe USD pricing (single source of truth), indicative EUR/GBP/CHF reference rates, CFO Executive Brief API URL (/api/proposal/executive-brief), and zero-touch self-service checkout path for a specified Startlyst SKU.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "enum": [
+              "startup_monthly",
+              "startup_annual",
+              "growth_monthly",
+              "growth_annual",
+              "enterprise_monthly",
+              "enterprise_annual",
+              "holding_monthly",
+              "holding_annual"
+            ],
+            "default": "growth_annual"
+          },
+          "region": {
+            "type": "string",
+            "enum": ["US", "EU", "UK", "CH", "AU", "GLOBAL"],
+            "default": "GLOBAL"
+          },
+          "brandName": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
   "resources": [
@@ -174,7 +289,9 @@
     "cryptographicBoundary": {
       "protectedCore": "core-engine/**",
       "openWorkspace": "user-workspace/**",
+      "openComponents": "src/components/**",
       "openTypedBridge": "sdk-bridge/startlyst.d.ts",
+      "handoffBlueprint": "AI_AGENT_HANDOFF.md",
       "governanceDocument": "AI_SYMBIOSIS_GOVERNANCE.md",
       "aiIgnoreFiles": [".aiignore", ".agentignore", ".llmignore"]
     },

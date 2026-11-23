@@ -1,6 +1,6 @@
 # Startlyst — Verified Engineering Benchmarks, Reproduction Methodology & Architectural Boundaries
 
-> **Policy**: Every figure in Section 2 is an empirically measured result recorded inside an isolated, air-gapped `/tmp` build of a compiled Startlyst customer storefront archive (`holding_annual`, `168` files) with zero external network traffic. No synthetic projections, unverified marketing claims, or cherry-picked micro-benchmarks appear in this document.
+> **Policy**: Every figure in Section 2 is an empirically measured result recorded inside an isolated, air-gapped `/tmp` build of a compiled Startlyst customer storefront archive (`holding_annual`, `169` files including root `AI_AGENT_HANDOFF.md`) with zero external network traffic. No synthetic projections, unverified marketing claims, or cherry-picked micro-benchmarks appear in this document.
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Parameter | Exact Configuration |
 | :--- | :--- |
-| **Target Artifact** | Compiled customer BYOC ZIP (`holding_annual`, `168` files, Next.js `15.5.29`, React `18.3.1`, PostCSS `8.5.33`, `0` known `npm audit` vulnerabilities) |
+| **Target Artifact** | Compiled customer BYOC ZIP (`holding_annual`, `169` files, Next.js `15.5.29`, React `18.3.1`, PostCSS `8.5.33`, `0` known `npm audit` vulnerabilities) |
 | **Runtime** | Node.js `v24.22.0` (`node:sqlite` built-in `DatabaseSync`, V8 default heap — `--max-old-space-size` intentionally **unset** during measurement) |
 | **Isolation & Egress Guard** | Extracted and built inside `/tmp` with a preloaded runtime `globalThis.fetch` probe intercepting and counting any non-loopback outbound HTTP/HTTPS call (`0` allowed by default) |
 | **Database Engine** | Local NVMe SQLite WAL (`PRAGMA journal_mode = WAL`, `PRAGMA synchronous = NORMAL`, `PRAGMA busy_timeout = 5000`, `PRAGMA cache_size = -16000`, `PRAGMA foreign_keys = ON`) |
