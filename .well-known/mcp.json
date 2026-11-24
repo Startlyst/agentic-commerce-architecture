@@ -7,36 +7,16 @@
   "description": "Self-sovereign BYOC headless commerce & agentic MCP checkout engine for B2B storefronts.",
   "version": "1.0.0",
   "websiteUrl": "https://startlyst.com",
-  "repository": {
-    "url": "https://github.com/Startlyst/agentic-commerce-architecture",
-    "source": "github"
-  },
+  "repository": {"url":"https://github.com/Startlyst/agentic-commerce-architecture","source":"github"},
   "icons": [
-    {
-      "src": "https://startlyst.com/icon.svg",
-      "mimeType": "image/svg+xml"
-    }
+    {"src":"https://startlyst.com/icon.svg","mimeType":"image/svg+xml"}
   ],
   "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://startlyst.com/api/mcp"
-    }
+    {"type":"streamable-http","url":"https://startlyst.com/api/mcp"}
   ],
   "protocolVersion": "2025-11-25",
-  "authentication": {
-    "required": false,
-    "type": "none_for_discovery_tools"
-  },
-  "capabilities": {
-    "tools": {
-      "listChanged": false
-    },
-    "resources": {
-      "subscribe": false,
-      "listChanged": false
-    }
-  },
+  "authentication": {"required":false,"type":"none_for_discovery_tools"},
+  "capabilities": {"tools":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false}},
   "discovery": {
     "serverManifest": "https://startlyst.com/.well-known/server.json",
     "mcpManifest": "https://startlyst.com/.well-known/mcp.json",
@@ -57,154 +37,578 @@
   "tools": [
     {
       "name": "get_storefront_catalog",
-      "description": "Retrieve Startlyst 4-tier self-sovereign BYOC licensing catalog (startup, growth, enterprise, holding), zero-commission economics, and monthly/annual pricing.",
+      "title": "Get Startlyst Licensing Catalog",
+      "description": "Unauthenticated, read-only static snapshot of Startlyst's 8-SKU B2B BYOC catalog (USD pricing, billing cycles, payment rails, entitlements) bundled with the server build. Use to list all SKUs or compare cycles; use get_procurement_checkout_path for one SKU's checkout URLs and indicative FX rates, or evaluate_architecture_fit for tier sizing.",
+      "annotations": {
+        "title": "Get Startlyst Licensing Catalog",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "billingCycle": {
             "type": "string",
             "enum": ["all", "monthly", "annual"],
-            "default": "all"
+            "default": "all",
+            "description": "Filter returned SKUs by billing cycle. Passing \"all\" (default) returns all 8 monthly and annual SKUs; \"monthly\" or \"annual\" returns only the 4 matching SKUs."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "vendor",
+          "canonicalOrigin",
+          "commissionRatePercent",
+          "paymentRails",
+          "zipArtifactGate",
+          "billingCycleFilter",
+          "skus"
+        ],
+        "properties": {
+          "vendor": {"type":"string"},
+          "canonicalOrigin": {"type":"string"},
+          "commissionRatePercent": {"type":"number"},
+          "paymentRails": {"type":"array","items":{"type":"string"}},
+          "zipArtifactGate": {"type":"string"},
+          "billingCycleFilter": {"type":"string"},
+          "skus": {
+            "type": "array",
+            "description": "Filtered SKU catalog records with USD pricing and tier entitlements.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "sku",
+                "tier",
+                "billingCycle",
+                "name",
+                "standardPriceUsd",
+                "referralPriceUsd",
+                "referralDiscountUsd",
+                "entitlements"
+              ],
+              "properties": {
+                "sku": {"type":"string"},
+                "tier": {"type":"string"},
+                "billingCycle": {"type":"string"},
+                "name": {"type":"string"},
+                "standardPriceUsd": {"type":"number"},
+                "referralPriceUsd": {"type":"number"},
+                "referralDiscountUsd": {"type":"number"},
+                "entitlements": {"type":"object","additionalProperties":true}
+              }
+            }
+          }
+        }
       }
     },
     {
       "name": "evaluate_b2b_procurement_tco",
-      "description": "Evaluate 12-month BYOC license TCO vs variable GMV transaction fees across Startlyst licensing tiers.",
+      "title": "Evaluate Simple Annual B2B TCO",
+      "description": "Unauthenticated, read-only deterministic calculation comparing one Startlyst annual license against an illustrative 2% annual GMV fee using bundled static USD pricing (excludes buyer cloud hosting costs). Use for a quick single-tier annual check; use evaluate_architecture_fit for tier sizing, monthly x12 math, multi-store base costs, or regional tax.",
+      "annotations": {
+        "title": "Evaluate Simple Annual B2B TCO",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "annualGmvUsd": {
             "type": "number",
             "minimum": 10000,
-            "default": 5000000
+            "default": 5000000,
+            "description": "Projected annual Gross Merchandise Value (GMV) in USD used to compute an illustrative 2% legacy variable fee comparison. Values below 10000 are clamped to 10000; defaults to 5000000."
           },
           "tier": {
             "type": "string",
             "enum": ["single", "growth", "agency", "holding"],
-            "default": "growth"
+            "default": "growth",
+            "description": "Internal tier code mapped to its annual SKU: \"single\" maps to startup_annual, \"growth\" maps to growth_annual (default), \"agency\" maps to enterprise_annual, and \"holding\" maps to holding_annual."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "tier",
+          "annualSku",
+          "annualGmvUsd",
+          "startlystAnnualLicenseUsd",
+          "startlystTransactionFeePercent",
+          "illustrativeLegacyVariableFeeUsd",
+          "estimated12MonthNetSavingsUsd",
+          "currency"
+        ],
+        "properties": {
+          "tier": {"type":"string"},
+          "annualSku": {"type":"string"},
+          "annualGmvUsd": {"type":"number"},
+          "startlystAnnualLicenseUsd": {"type":"number"},
+          "startlystTransactionFeePercent": {"type":"number"},
+          "illustrativeLegacyVariableFeeUsd": {"type":"number","description":"Illustrative 2% annual variable GMV fee in USD."},
+          "estimated12MonthNetSavingsUsd": {
+            "type": "number",
+            "description": "Illustrative 12-month delta (legacy 2% fee minus annual license; excludes cloud hosting)."
+          },
+          "replacesStackLabel": {"type":"string"},
+          "currency": {"type":"string"}
+        }
       }
     },
     {
       "name": "get_omni_device_adapter_spec",
-      "description": "Return non-destructive .stlyst-isolated-scope / --stlyst-* CSS and headless useStartlystCommerce() specs for micro_mobile, smartphone, tablet_foldable, desktop_studio, and spatial_future.",
+      "title": "Get Omni-Device CSS & Headless Adapter Spec",
+      "description": "Unauthenticated, read-only static snapshot of Startlyst's 5 viewport profiles, CSS isolation contract (.stlyst-isolated-scope, --stlyst-*), and headless React/API mount points bundled with the server build. Use for frontend breakpoints and CSS/hook integration; use get_ai_customization_blueprint for repository boundaries, CLI setup, and UI redesign.",
+      "annotations": {
+        "title": "Get Omni-Device CSS & Headless Adapter Spec",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "targetDevice": {
             "type": "string",
             "enum": ["all", "micro_mobile", "smartphone", "tablet_foldable", "desktop_studio", "spatial_future"],
-            "default": "all"
+            "default": "all",
+            "description": "Viewport profile filter. Passing \"all\" (default) returns all 5 viewport profiles; passing a specific device ID returns only the matching viewport specification."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "schemaUrl",
+          "isolatedCssScope",
+          "cssVariablePrefix",
+          "headlessHook",
+          "apiGatewayMount",
+          "targetDeviceFilter",
+          "viewports"
+        ],
+        "properties": {
+          "schemaUrl": {"type":"string"},
+          "isolatedCssScope": {"type":"string"},
+          "cssVariablePrefix": {"type":"string"},
+          "headlessHook": {"type":"string"},
+          "apiGatewayMount": {"type":"string"},
+          "targetDeviceFilter": {"type":"string"},
+          "viewports": {
+            "type": "array",
+            "description": "Matching responsive viewport profiles.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["id", "viewportRange", "touchTargetMinPx", "isolatedCssScope"],
+              "properties": {
+                "id": {"type":"string"},
+                "viewportRange": {"type":"string"},
+                "touchTargetMinPx": {"type":"number"},
+                "isolatedCssScope": {"type":"string"}
+              }
+            }
+          },
+          "ipProtectionLayers": {
+            "type": "array",
+            "description": "Optional open workspace vs. sealed core layers.",
+            "items": {"type":"object","additionalProperties":true}
+          }
+        }
       }
     },
     {
       "name": "verify_legal_and_security_posture",
-      "description": "Inspect Startlyst MSA governance posture including Stripe fail-closed ZIP gating, Section 10 Agile Security Amendments, and Section 11 Merchant Illegal-Use Indemnification.",
+      "title": "Verify Legal & Security Governance Posture",
+      "description": "Unauthenticated, read-only static snapshot of key Startlyst MSA clauses (Section 10 security updates, Section 11 unlawful-use indemnification, fail-closed /api/compile-zip Stripe gate) and the $100 USD liability cap bundled with the build. Use for legal/gating checks; use get_verified_benchmarks for metrics or get_procurement_checkout_path for tax/URLs.",
+      "annotations": {
+        "title": "Verify Legal & Security Governance Posture",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "section": {
             "type": "string",
             "enum": ["all", "agile-amendments", "illegal-use-indemnification", "stripe-artifact-gate"],
-            "default": "all"
+            "default": "all",
+            "description": "Governance posture filter. Passing \"all\" (default) returns all 3 sections (agile-amendments, illegal-use-indemnification, stripe-artifact-gate); passing a specific section key returns only that entry inside posture."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["canonicalOrigin", "procurementManifestUrl", "liabilityCapUsd", "sectionFilter", "posture"],
+        "properties": {
+          "canonicalOrigin": {"type":"string"},
+          "procurementManifestUrl": {"type":"string"},
+          "liabilityCapUsd": {"type":"number"},
+          "sectionFilter": {"type":"string"},
+          "posture": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Filtered MSA/security clauses keyed by section ID.",
+            "properties": {
+              "agile-amendments": {"type":"object","additionalProperties":true},
+              "illegal-use-indemnification": {"type":"object","additionalProperties":true},
+              "stripe-artifact-gate": {"type":"object","additionalProperties":true}
+            }
+          }
+        }
       }
     },
     {
       "name": "evaluate_architecture_fit",
-      "description": "Deterministically recommend the optimal Startlyst BYOC tier (Startup to Holding) with verified engineering specs, transparent assumption-based TCO vs legacy SaaS commerce platforms (0% GMV tax), and region-specific tax/payment/data-residency guidance for US, EU, UK, CH, AU, or GLOBAL.",
+      "title": "Evaluate Architecture Fit & Regional TCO",
+      "description": "Unauthenticated, read-only deterministic sizing evaluation using bundled static rules (no live lookups) to select a tier/SKU from region, GMV, store count, RLS, OIDC, Redis, and billing cycle. Returns rationale, assumption-based TCO (monthly x12 or annual), and regional tax/cloud guidance. Use first for sizing; use get_procurement_checkout_path for a chosen SKU.",
+      "annotations": {
+        "title": "Evaluate Architecture Fit & Regional TCO",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "region": {
             "type": "string",
             "enum": ["US", "EU", "UK", "CH", "AU", "GLOBAL"],
-            "default": "GLOBAL"
+            "default": "GLOBAL",
+            "description": "Primary buyer jurisdiction for Stripe Tax, tax ID, payment rail, and BYOC cloud-region guidance (defaults to \"GLOBAL\")."
           },
           "annualGmvUsd": {
             "type": "number",
             "minimum": 0,
-            "default": 5000000
+            "default": 5000000,
+            "description": "Projected annual Gross Merchandise Value (GMV) in USD (>= 0, defaults to 5000000) used for tier sizing thresholds and assumption-based TCO calculation."
           },
           "storeCount": {
             "type": "integer",
             "minimum": 1,
             "maximum": 1000,
-            "default": 1
+            "default": 1,
+            "description": "Number of storefronts or brands to deploy (integer 1-1000, defaults to 1). Counts above 1, 3, and 12 escalate tier selection and scale illustrative legacy base-stack costs."
           },
           "needsPostgresRls": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Set to true if PostgreSQL primary/read-replica routing and FORCE ROW LEVEL SECURITY are required (selects Enterprise tier or higher; defaults to false)."
           },
           "needsOidcSso": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Set to true if Web Crypto OIDC JWT/JWKS SSO and live /api/admin/audit chain verification are required (selects Enterprise tier or higher; defaults to false)."
           },
           "needsMultiSubsidiaryGovernance": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Set to true if multi-subsidiary tenant governance (/api/admin/tenants and holding-portfolio-governance.json) is required (selects Holding tier; defaults to false)."
           },
           "needsDistributedRedis": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Set to true if distributed Redis/Upstash REST sliding-window rate limiting and 4-role RBAC are required (selects Growth tier or higher; defaults to false)."
           },
           "billingCyclePreference": {
             "type": "string",
             "enum": ["annual", "monthly"],
-            "default": "annual"
+            "default": "annual",
+            "description": "Preferred billing cycle for SKU recommendation and TCO math: \"annual\" (default, uses annual prepay rate) or \"monthly\" (annualizes monthly rate x12 and reports annual-switch savings)."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "evaluationMode",
+          "operatingModel",
+          "inputsEcho",
+          "recommendation",
+          "verifiedTechnicalEvidence",
+          "transparentTcoEstimate",
+          "regionalTaxPaymentAndResidencyGuidance",
+          "aiNativeOwnershipHighlights",
+          "honestArchitecturalBoundaries",
+          "nextSelfServiceActions"
+        ],
+        "properties": {
+          "evaluationMode": {"type":"string"},
+          "operatingModel": {"type":"string"},
+          "inputsEcho": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Normalized workload inputs.",
+            "properties": {
+              "region": {"type":"string"},
+              "annualGmvUsd": {"type":"number"},
+              "storeCount": {"type":"integer"},
+              "billingCyclePreference": {"type":"string"}
+            }
+          },
+          "recommendation": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Selected tier, SKU, file count, live USD price, FX equivalents, and rationale.",
+            "properties": {
+              "recommendedTier": {"type":"string"},
+              "recommendedSku": {"type":"string"},
+              "deliverableFilesCount": {"type":"integer"},
+              "liveStripeUsdExTax": {"type":"number"},
+              "annualSavingsVs12MoUsd": {"type":["number","null"]}
+            }
+          },
+          "verifiedTechnicalEvidence": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Measured build, load, memory, and SQLite WAL benchmarks.",
+            "properties": {
+              "firstLoadJsKb": {"type":"number"},
+              "productionBuildSec": {"type":"number"},
+              "sustained60sRps": {"type":"number"},
+              "peakRssMb": {"type":"number"}
+            }
+          },
+          "transparentTcoEstimate": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Assumption-based 12-month TCO (monthly x12 or annual) and annual-switch savings.",
+            "properties": {
+              "selectedBillingCycle": {"type":"string"},
+              "selectedSkuAnnualizedLicenseUsdExTax": {"type":"number"},
+              "illustrative12MonthSoftwareDifferenceUsd": {"type":"number"},
+              "additionalSavingsIfSwitchingToAnnualUsd": {"type":["number","null"]}
+            }
+          },
+          "regionalTaxPaymentAndResidencyGuidance": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Regional Stripe Tax regime, tax ID, rails, and BYOC cloud regions.",
+            "properties": {"region":{"type":"string"},"taxRegimeLabel":{"type":"string"},"stripeTaxCode":{"type":"string"}}
+          },
+          "aiNativeOwnershipHighlights": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Self-service, $0 UI redesign fee, and AI_AGENT_HANDOFF.md flags.",
+            "properties": {
+              "zeroHumanSupportDesk": {"type":"boolean"},
+              "additionalUiRedesignFeeUsd": {"type":"number"},
+              "handoffDocumentInZip": {"type":"string"}
+            }
+          },
+          "honestArchitecturalBoundaries": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fit scope, non-fit exclusions, and shared-responsibility notice.",
+            "properties": {"strongFit":{"type":"string"},"nonFit":{"type":"string"}}
+          },
+          "nextSelfServiceActions": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Self-service checkout, CFO brief API, catalog, and benchmark URLs.",
+            "properties": {"executiveBriefApiUrl":{"type":"string"},"selfServiceCheckoutUrl":{"type":"string"}}
+          }
+        }
       }
     },
     {
       "name": "get_ai_customization_blueprint",
-      "description": "Return structured post-purchase instructions for deploying and completely redesigning the storefront UI from scratch ($0 extra license fee) using your own AI coding agent, internal LLM, or MCP-compatible coding assistant via root AI_AGENT_HANDOFF.md and protected 2-layer boundaries.",
+      "title": "Get AI Customization & Handoff Blueprint",
+      "description": "Unauthenticated, read-only static tier-parameterized blueprint from the build covering AI_AGENT_HANDOFF.md, writable buyer vs. protected core paths, 6-step Day-1 CLI setup, startlyst:doctor diagnostics, and Ed25519/--upgrade-from-zip rules. Use for repository layout and safe UI redesign; use get_omni_device_adapter_spec for CSS scoping and viewports.",
+      "annotations": {
+        "title": "Get AI Customization & Handoff Blueprint",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "tier": {
             "type": "string",
             "enum": ["startup", "growth", "enterprise", "holding"],
-            "default": "growth"
+            "default": "growth",
+            "description": "Target Startlyst tier (startup, growth, enterprise, or holding; defaults to \"growth\") used to populate deliverable file counts and tier-specific managed kernel paths."
           },
           "adapterMode": {
             "type": "string",
             "enum": ["standalone", "subpath", "headless"],
-            "default": "standalone"
+            "default": "standalone",
+            "description": "Target storefront mount mode (standalone, subpath, or headless; defaults to \"standalone\") echoed in the returned customization blueprint."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "schema",
+          "tier",
+          "adapterMode",
+          "deliverableFileCounts",
+          "operatingModel",
+          "handoffArtifactsIncludedInEveryZip",
+          "threeStepPrePurchaseFlow",
+          "day1SixStepLaunchSequence",
+          "layerBoundaries",
+          "selfDiagnosticsAndAutonomousRepair"
+        ],
+        "properties": {
+          "schema": {"type":"string"},
+          "tier": {"type":"string"},
+          "adapterMode": {"type":"string"},
+          "deliverableFileCounts": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Monthly and annual ZIP file counts.",
+            "properties": {"monthly":{"type":"integer"},"annual":{"type":"integer"}}
+          },
+          "operatingModel": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Zero-support flags and $0 UI redesign fee.",
+            "properties": {"zeroHumanSupportDesk":{"type":"boolean"},"additionalUiRedesignLicenseFeeUsd":{"type":"number"}}
+          },
+          "handoffArtifactsIncludedInEveryZip": {
+            "type": "array",
+            "description": "Bundled handoff docs, typed bridge, and ignore guards.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["path", "purpose"],
+              "properties": {"path":{"type":"string"},"purpose":{"type":"string"}}
+            }
+          },
+          "threeStepPrePurchaseFlow": {
+            "type": "array",
+            "description": "3-step unzip, Day-1 build, and UI redesign sequence.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["step", "title", "detail"],
+              "properties": {"step":{"type":"integer"},"title":{"type":"string"},"detail":{"type":"string"}}
+            }
+          },
+          "day1SixStepLaunchSequence": {
+            "type": "array",
+            "description": "6 Day-1 CLI commands and expected outcomes.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["step", "command", "expectedOutcome"],
+              "properties": {"step":{"type":"integer"},"command":{"type":"string"},"expectedOutcome":{"type":"string"}}
+            }
+          },
+          "layerBoundaries": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Writable buyer paths vs. protected kernel paths.",
+            "properties": {
+              "writableBuyerOwnedLayer": {"type":"object","additionalProperties":true},
+              "protectedUpgradableKernelLayer": {"type":"object","additionalProperties":true}
+            }
+          },
+          "selfDiagnosticsAndAutonomousRepair": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "startlyst:doctor CLI commands, probes, and static_frozen_mode continuity.",
+            "properties": {"doctorCommand":{"type":"string"},"strictProdCommand":{"type":"string"}}
+          }
+        }
       }
     },
     {
       "name": "get_verified_benchmarks",
-      "description": "Return empirically measured engineering benchmarks (112 kB First Load JS, 1.89s build, 4,003.6 RPS, 351.27 MB Peak RSS, 392,354.7 QPS SQLite WAL, 0.00% SQLITE_BUSY, 0 default egress), reproduction conditions, and candid BYOC shared-responsibility boundaries.",
+      "title": "Get Verified Engineering Benchmarks",
+      "description": "Unauthenticated, read-only static snapshot of air-gapped local benchmarks for the current build (build footprint, 60s mixed load, 512 MB memory, 310k-row SQLite WAL, host-cutout autonomy, upgrades, 5 operational boundaries; no live tests run). Use to audit measured metrics; use evaluate_architecture_fit for sizing or verify_legal_and_security_posture for MSA terms.",
+      "annotations": {
+        "title": "Get Verified Engineering Benchmarks",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
           "category": {
             "type": "string",
             "enum": ["all", "build", "load", "database", "autonomy", "upgrades", "boundaries"],
-            "default": "all"
+            "default": "all",
+            "description": "Benchmark section filter. Passing \"all\" (default) returns all 6 sections (build, load, database, autonomy, upgrades, boundaries); passing a specific category returns only that key inside benchmarks."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["schema", "policy", "reproductionConditions", "categoryFilter", "benchmarks"],
+        "properties": {
+          "schema": {"type":"string"},
+          "policy": {"type":"string"},
+          "reproductionConditions": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Target artifact, runtime versions, isolation guard, and BENCHMARKS.md URL.",
+            "properties": {
+              "targetArtifact": {"type":"string"},
+              "nodeRuntime": {"type":"string"},
+              "nextJsVersion": {"type":"string"},
+              "canonicalBenchmarksDoc": {"type":"string"}
+            }
+          },
+          "categoryFilter": {"type":"string"},
+          "benchmarks": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "All 6 benchmark sections when category=\"all\", or the single requested key.",
+            "properties": {
+              "build": {"type":"object","additionalProperties":true},
+              "load": {"type":"object","additionalProperties":true},
+              "database": {"type":"object","additionalProperties":true},
+              "autonomy": {"type":"object","additionalProperties":true},
+              "upgrades": {"type":"object","additionalProperties":true},
+              "boundaries": {"type":"array","items":{"type":"string"}}
+            }
+          }
+        }
       }
     },
     {
       "name": "get_procurement_checkout_path",
-      "description": "Return exact live Stripe USD pricing (single source of truth), indicative EUR/GBP/CHF reference rates, CFO Executive Brief API URL (/api/proposal/executive-brief), and zero-touch self-service checkout path for a specified Startlyst SKU.",
+      "title": "Get SKU Pricing & Self-Service Checkout Path",
+      "description": "Unauthenticated, read-only lookup from bundled static tables returning live USD Stripe pricing vs. indicative EUR/GBP/CHF FX rates, file count, regional tax guidance, CFO brief API URLs, and self-service checkout links for one SKU (no session/charge created). Use once an SKU is chosen; use get_storefront_catalog to browse all or evaluate_architecture_fit to size.",
+      "annotations": {
+        "title": "Get SKU Pricing & Self-Service Checkout Path",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -220,19 +624,93 @@
               "holding_monthly",
               "holding_annual"
             ],
-            "default": "growth_annual"
+            "default": "growth_annual",
+            "description": "Exact Startlyst SKU identifier to resolve pricing, deliverable file count, renewal document URL, and self-service checkout path for (defaults to \"growth_annual\")."
           },
           "region": {
             "type": "string",
             "enum": ["US", "EU", "UK", "CH", "AU", "GLOBAL"],
-            "default": "GLOBAL"
+            "default": "GLOBAL",
+            "description": "Buyer jurisdiction (US, EU, UK, CH, AU, or GLOBAL; defaults to \"GLOBAL\") used to attach regional Stripe Tax, tax ID, payment rail, and BYOC cloud-region guidance."
           },
           "brandName": {
             "type": "string",
-            "maxLength": 80
+            "maxLength": 80,
+            "description": "Optional company or storefront brand name (up to 80 characters, sanitized of angle brackets and quotes) appended as the brand query parameter in the returned CFO Executive Brief API URLs."
           }
         },
         "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "schema",
+          "sku",
+          "cohortId",
+          "planName",
+          "tier",
+          "cohortTier",
+          "billingCycle",
+          "billingInterval",
+          "billingDurationIso",
+          "deliverableFileCount",
+          "pricingMasterSsot",
+          "procurementAndCheckoutUrls",
+          "regionalTaxAndPaymentGuidance",
+          "operatingModelAndLegalSummary"
+        ],
+        "properties": {
+          "schema": {"type":"string"},
+          "sku": {"type":"string"},
+          "cohortId": {"type":"string"},
+          "planName": {"type":"string"},
+          "tier": {"type":"string"},
+          "cohortTier": {"type":"string"},
+          "billingCycle": {"type":"string"},
+          "billingInterval": {"type":"string"},
+          "billingDurationIso": {"type":"string"},
+          "deliverableFileCount": {"type":"integer"},
+          "pricingMasterSsot": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Live USD Stripe pricing, indicative EUR/GBP/CHF FX equivalents, and tax code.",
+            "properties": {
+              "settlementCurrency": {"type":"string"},
+              "liveStripeUsd": {"type":"number"},
+              "liveStripeCentsUsd": {"type":"integer"},
+              "annualSavingsVs12MoUsd": {"type":["number","null"]},
+              "referenceCurrencyAmounts": {"type":"object","additionalProperties":true},
+              "stripeTaxCode": {"type":"string"}
+            }
+          },
+          "procurementAndCheckoutUrls": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Self-service checkout, CFO Executive Brief API, catalog, and renewal URLs.",
+            "properties": {
+              "selfServiceCheckoutUrl": {"type":"string"},
+              "executiveBriefApiUrl": {"type":"string"},
+              "liveStripeCatalogApiUrl": {"type":"string"}
+            }
+          },
+          "regionalTaxAndPaymentGuidance": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Regional Stripe Tax regime, tax ID, payment rails, and BYOC cloud regions.",
+            "properties": {"region":{"type":"string"},"taxRegimeLabel":{"type":"string"},"stripeTaxCode":{"type":"string"}}
+          },
+          "operatingModelAndLegalSummary": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Zero-touch flags, clickwrap requirement, 72h refund window, and shared responsibility.",
+            "properties": {
+              "zeroTouchSelfService": {"type":"boolean"},
+              "clickwrapRequiredBeforeCheckout": {"type":"boolean"},
+              "refundWindowHours": {"type":"integer"}
+            }
+          }
+        }
       }
     }
   ],
@@ -299,12 +777,7 @@
       "adapterModule": "core-engine/universal-ai-symbiosis-adapter.ts",
       "canonicalEnvelopeVersion": "startlyst.canonical-ai-symbiosis.v1",
       "unknownFieldsPreservedIn": "extensiblePayload",
-      "supportedFutureProtocols": [
-        "mcp/2027+",
-        "a2a/vNext",
-        "openai-agent/future",
-        "custom-enterprise-llm"
-      ],
+      "supportedFutureProtocols": ["mcp/2027+", "a2a/vNext", "openai-agent/future", "custom-enterprise-llm"],
       "cloudSyncEndpoints": ["/api/edge-feed", "/api/startlyst-engine/ai-protocol-sync"],
       "zeroCrashFallback": true
     }
