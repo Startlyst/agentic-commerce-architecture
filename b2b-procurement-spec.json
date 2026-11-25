@@ -110,25 +110,25 @@
     "brownfieldProtectedBytesMutated": 0,
     "tierDeliverableFileCounts": {
       "startup": {
-        "monthly": 154,
-        "annual": 161
+        "monthly": 159,
+        "annual": 166
       },
       "growth": {
-        "monthly": 156,
-        "annual": 163
+        "monthly": 161,
+        "annual": 168
       },
       "enterprise": {
-        "monthly": 164,
-        "annual": 171
+        "monthly": 169,
+        "annual": 176
       },
       "holding": {
-        "monthly": 166,
-        "annual": 173
+        "monthly": 171,
+        "annual": 178
       }
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "ded660e61a1e291f8d6cf90aa621641020d52e0ca8eb8d208210924e9866c21e",
+  "merkleRootReference": "28bd651f5a42f09f174aff548321c5343a55e6049a3901071f8154987ea6eaf2",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",
