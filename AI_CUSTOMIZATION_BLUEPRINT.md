@@ -1,6 +1,6 @@
 # Startlyst — Zero-Touch Operating Model & Customer AI Customization Blueprint
 
-> **Purpose**: Public pre-purchase architecture reference explaining how Startlyst operates with **zero human support overhead** and how **your own AI coding agent**, **internal LLM**, or **MCP-compatible coding assistant** launches, fully redesigns the storefront UI at `$0` extra license cost, and self-repairs issues locally using root `AI_AGENT_HANDOFF.md` inside every licensed ZIP (`159–178` files).
+> **Purpose**: Public pre-purchase architecture reference explaining how Startlyst operates with **zero human support overhead** and how **your own AI coding agent**, **internal LLM**, or **MCP-compatible coding assistant** launches, fully redesigns the storefront UI at `$0` extra license cost, and self-repairs issues locally using root `AI_AGENT_HANDOFF.md` inside every licensed ZIP (`162–181` files).
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Step | Action | Outcome |
 | :--- | :--- | :--- |
-| **Step 1** | Unzip the verified archive (`159–178` files) and point **your own AI coding agent**, **internal LLM**, or **MCP-compatible coding assistant** to root `AI_AGENT_HANDOFF.md`. | Root `.aiignore` / `.agentignore` / `.llmignore` shield `core-engine/**` while opening `user-workspace/**`, `src/components/**`, and `sdk-bridge/startlyst.d.ts`. |
+| **Step 1** | Unzip the verified archive (`162–181` files) and point **your own AI coding agent**, **internal LLM**, or **MCP-compatible coding assistant** to root `AI_AGENT_HANDOFF.md`. | Root `.aiignore` / `.agentignore` / `.llmignore` shield `core-engine/**` while opening `user-workspace/**`, `src/components/**`, and `sdk-bridge/startlyst.d.ts`. |
 | **Step 2** | Run the verified Day-1 6-step launch sequence (`verify-installation.mjs` -> `npm install` -> `npm run setup` -> `startlyst:doctor` -> `npm run build` -> `verify-installation.mjs`). | Compiles in **`1.89s`** (`112 kB` First Load JS, `EXIT=0`) and deploys into your own regional cloud (US Virginia, EU Frankfurt, UK London, CH Zurich, or AU Sydney) with `0` default third-party outbound fetches. |
 | **Step 3** | Instruct your own AI coding agent to redesign 100% of `user-workspace/ui/Storefront.tsx`, `user-workspace/brand.config.ts`, `user-workspace/custom-styles.css`, `src/components/**`, and `src/app/globals.css`. | **`$0` additional license fee**, **`0%` GMV commission**, and **`0` protected bytes mutated** whenever future Ed25519 patches or `--upgrade-from-zip` upgrades execute. |
 
