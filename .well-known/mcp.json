@@ -543,7 +543,7 @@
     {
       "name": "get_verified_benchmarks",
       "title": "Get Verified Engineering Benchmarks",
-      "description": "Unauthenticated, read-only static snapshot of air-gapped local benchmarks for the current build (build footprint, 60s mixed load, 512 MB memory, 310k-row SQLite WAL, host-cutout autonomy, upgrades, 5 operational boundaries; no live tests run). Use to audit measured metrics; use evaluate_architecture_fit for sizing or verify_legal_and_security_posture for MSA terms.",
+      "description": "Unauthenticated, read-only static snapshot of air-gapped local benchmarks for the current build (build footprint, 60s mixed load, 512 MB memory, 310k-row SQLite WAL, upstream-outage autonomy, upgrades, 5 operational boundaries; no live tests run). Use to audit measured metrics; use evaluate_architecture_fit for sizing or verify_legal_and_security_posture for MSA terms.",
       "annotations": {
         "title": "Get Verified Engineering Benchmarks",
         "readOnlyHint": true,

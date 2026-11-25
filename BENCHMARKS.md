@@ -25,7 +25,7 @@
 | :--- | :--- | :--- |
 | 1 | `node verify-installation.mjs` | All files SHA-256 + Merkle Root + SLDL invariants + 8 AI manifests verified (`EXIT=0`) |
 | 2 | `npm install` | `111` packages installed, `0` production vulnerabilities (`EXIT=0`) |
-| 3 | `npm run setup` | Non-clobber `.env.local` secret bootstrap + live SQLite DDL verification (`14` tables / `22` indexes, `EXIT=0`) |
+| 3 | `npm run setup` | Non-destructive `.env.local` secret bootstrap + live SQLite DDL verification (`14` tables / `22` indexes, `EXIT=0`) |
 | 4 | `npm run startlyst:doctor` | `0` errors / `7` checks passed (`EXIT=0`) |
 | 5 | `npm run build` (`next build`) | Compiled in **`1.89s`** · Storefront `/` First Load JS **`112 kB`** (`8.82 kB` route + `103 kB` shared) (`EXIT=0`) |
 | 6 | `node verify-installation.mjs` (post-build) | Full post-build cryptographic & manifest parity verified (`EXIT=0`) |
@@ -54,12 +54,12 @@ Workload mix against live `next start` (`O(1)` sliding-window counter enabled, `
 - **Zero Memory Leak Evidence**: Across `240,218` mixed production requests, RSS peaked at **`351.27 MB`** (well inside a `512 MB` container without needing `--max-old-space-size`), stabilized downward to `331.77 MB` during `50s–60s`, and HeapUsed settled at **`34.33 MB`** after GC (`+3.63 MB` vs. `30.70 MB` idle baseline).
 - **Zero Outbound Egress Evidence**: Preloaded fetch interceptor recorded **`0`** outbound third-party requests over the entire 60-second run.
 
-### 2.3 SQLite WAL 310,000-Row Concurrency, Host-Cutout Autonomy & Non-Destructive Upgrades
+### 2.3 SQLite WAL 310,000-Row Concurrency, Upstream-Outage Autonomy & Non-Destructive Upgrades
 
 | Verification Axis | Measured Result | Conditions / Faults Tested |
 | :--- | :--- | :--- |
 | **SQLite WAL 310,000-Row Stress** | **`392,354.7 QPS`** indexed reads · **`10,508.7 WPS`** mixed reads/writes · **`0.00% SQLITE_BUSY`** (`0` lock errors) | Seeded `310,000` rows (`1.498 s`, final `312,000` rows) on local NVMe with `PRAGMA cache_size = -16000` + composite indexes |
-| **Host-Cutout Worker Autonomy** | **`100%` HTTP 200** (`P99 0.01–0.07 ms`) · **`0` outbound third-party fetches** | Fault-injected `backend/worker.js` with `startlyst.com` returning `ECONNREFUSED`, HTTP `503`, and indefinite hang (`1,500 ms` `AbortController` + bounded 5m TTL cache + `ctx.waitUntil()`) |
+| **Upstream-Outage Worker Autonomy** | **`100%` HTTP 200** (`P99 0.01–0.07 ms`) · **`0` outbound third-party fetches** | Fault-injected `backend/worker.js` with `startlyst.com` returning `ECONNREFUSED`, HTTP `503`, and indefinite hang (`1,500 ms` `AbortController` + bounded 5m TTL cache + `ctx.waitUntil()`) |
 | **Redis Outage Failover** | **`0` HTTP 500s** · automatic fallback to O(1) local sliding-window counter (`HTTP 429` preserved) | Live mid-flight Redis REST flip from `200` -> `503` -> timeout across 500 concurrent requests |
 | **Brownfield & Legacy Upgrade Integrity** | **`0` protected bytes mutated** · **`100%` order & custom DB table/column retention** · full rollback on fault | Tested offline `sync-core.mjs`, Ed25519-signed patch, and `--upgrade-from-zip` on legacy pre-hardening DB (`500` orders + custom columns + custom tables) plus mid-swap fault injection |
 
@@ -73,7 +73,7 @@ Every compiled customer ZIP ships self-contained so your own engineering team ca
 # 1. Verify archive integrity, SHA-256 checksums, Merkle Root & AI manifests
 node verify-installation.mjs
 
-# 2. Bootstrap local secrets & SQLite WAL schema (non-clobber)
+# 2. Bootstrap local secrets & SQLite WAL schema (non-destructive)
 npm install && npm run setup && npm run startlyst:doctor
 
 # 3. Compile production Next.js bundle and inspect First Load JS directly in build output
