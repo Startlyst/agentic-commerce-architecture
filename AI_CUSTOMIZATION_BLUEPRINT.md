@@ -26,7 +26,8 @@
 
 - **Writable Buyer-Owned Layer (`0` Bytes Mutated on Core Upgrades)**: `user-workspace/**`, `user-workspace/extensions/**` (7 typed business-logic hooks in `user-workspace/extensions/index.ts`), `src/components/**` (including `AddressAutocomplete.tsx`), open auditable `src/lib/security-utils.ts`, `src/app/globals.css`, `.env*`, `data/**`, `*.db` / `*.sqlite`, `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.mjs`, and custom buyer API routes.
 - **Protected Upgradable Kernel Layer (Managed via Ed25519 / `--upgrade-from-zip`)**: `core-engine/**`, `.startlyst/core-manifest.json`, managed security routes (`/api/checkout`, `/api/agent-checkout`, `/api/mcp`, `/api/webhooks/recovery`, `/api/healthz`, `/api/readyz`, `/api/admin/*`), and additive-only SQL migrations (`migrations/upgrade-additive-sqlite.sql`, `migrations/upgrade-additive-postgres.sql`).
-- **Open Typed Bridge & Self-Repair**: [`sdk-types/startlyst.d.ts`](./sdk-types/startlyst.d.ts), [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json), Doctor v2 (`npm run doctor -- --json`, `--fix`, `--restore-core`), and 9 UI-independent contract tests (`npm run verify:all`).
+- **Open Typed Bridge, Offline SBOM Audit & Self-Repair**: [`sdk-types/startlyst.d.ts`](./sdk-types/startlyst.d.ts), [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json), Doctor v2 (`npm run doctor -- --json`, `--fix`, `--restore-core`, `npm run renewal:brief` for 100% offline 365-day SBOM & continuity status, always `EXIT=0`), and 9 UI-independent contract tests (`npm run verify:all`).
+- **Symbiotic Annual Continuity**: `0%` GMV tax, **Continuity Price Lock** across uninterrupted annual renewals (lapse voids lock), and **Consecutive-Generation Upgrade Guarantee** for conflict-free `npm run sync-core` migrations (lapsed skip-generation re-contracts compile fresh).
 
 ---
 

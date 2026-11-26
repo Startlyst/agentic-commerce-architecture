@@ -26,7 +26,7 @@
 | 1 | `node verify-installation.mjs` | All files SHA-256 + Merkle Root + SLDL invariants + 8 AI manifests verified (`EXIT=0`) |
 | 2 | `npm install` | `111` packages installed, `0` production vulnerabilities (`EXIT=0`) |
 | 3 | `npm run setup` | Non-destructive `.env.local` secret bootstrap + live SQLite DDL verification (`14` tables / `22` indexes, `EXIT=0`) |
-| 4 | `npm run startlyst:doctor` | Doctor v2: `0` errors · `19` checks passed across 7 domains + `9` UI-independent contract tests (`npm run verify:all` `EXIT=0`) |
+| 4 | `npm run startlyst:doctor` | Doctor v2: `0` errors · `20` checks passed across 7 domains (incl. offline 365-day SBOM/continuity freshness & `npm run renewal:brief`) + `9` UI-independent contract tests (`npm run verify:all` `EXIT=0`) |
 | 5 | `npm run build` (`next build`) | Compiled in **`1.89s`** · Storefront `/` First Load JS **`112 kB`** (`8.82 kB` route + `103 kB` shared) (`EXIT=0`) |
 | 6 | `node verify-installation.mjs` (post-build) | Full post-build cryptographic & manifest parity verified (`EXIT=0`) |
 
@@ -71,7 +71,7 @@ Workload mix against live `next start` (`O(1)` sliding-window counter enabled, `
 | **Paginated MCP `search_catalog` (100k SKUs)** | **`~1.5–1.8 ms`** response · **`2.04 KB`** bounded JSON-RPC payload | 5-tool live MCP server (`get_storefront_catalog`, `search_catalog`, `get_product_by_sku`, `get_inventory_and_quote`, `create_agent_checkout_session`) |
 | **AI Discovery Payload Hygiene (`llms*.txt`)** | Per-product `/api/products/[slug]/llms.txt` **`~1.05 KB`** · root `/llms.txt` & `/llms-full.txt` strictly byte-capped | Prevents context-window bloat at 100k–500k SKUs while preserving full per-SKU machine readability |
 | **500,000-SKU Sitemap Sharding** | **`11` deterministic shards** (`50,000` URLs/shard max, Standards-compliant `sitemap.xml` index) | `computeSitemapShardPlan()` + `core-engine/discovery-delegates.ts` |
-| **Zero-Support Guardrails (Doctor v2 + Contracts)** | **`19` Doctor v2 checks** (7 domains, `--fix`, `--restore-core`) · **`9` UI-independent contract tests** | Full `npm run verify:all` (`doctor` + `verify:install` + `tsc --noEmit` + `lint-boundaries` + `test:contracts`) passes `EXIT=0` |
+| **Zero-Support Guardrails (Doctor v2 + Contracts)** | **`20` Doctor v2 checks** (7 domains, `--fix`, `--restore-core`, `--export-renewal-brief` offline SBOM brief) · **`9` UI-independent contract tests** | Full `npm run verify:all` (`doctor` + `verify:install` + `tsc --noEmit` + `lint-boundaries` + `test:contracts`) passes `EXIT=0`; offline freshness windows (`0–269d` / `270–364d` / `365+d`) stay strictly non-destructive (`EXIT=0`) |
 
 ---
 

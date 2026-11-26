@@ -109,10 +109,18 @@ Existing buyers running earlier pre-hardening releases can upgrade without re-bi
    ```
 3. The upgrader verifies `PACKAGE_CHECKSUMS.json` and the archive Merkle Root, backs up target files and the existing SQLite database into `.startlyst-sync-backup/<utc>/`, atomically updates managed security/core modules and `scripts/sync-core.mjs` itself, applies idempotent additive-only migrations (`migrations/upgrade-additive-sqlite.sql` / `migrations/upgrade-additive-postgres.sql` — strictly zero `DROP`, `TRUNCATE`, or `DELETE`) while preserving **100% of existing orders, custom tables, and custom columns**, and rolls back completely on any failure.
 
-### 5.3 Verifying Downloaded Archive Integrity & Host Attestation
+### 5.3 Symbiotic Annual Continuity Model (Zero Runtime Lock-in · 0% GMV Tax)
+Startlyst aligns annual renewals economically rather than via hostage lock-in (deployed storefronts emit **0 automatic production phone-home calls** and carry **0 remote runtime kill-switches**):
+1. **0% GMV Tax (Flat-Rate Alignment)**: Renewals stay flat-rate by tier regardless of GMV, order volume, or 100k–500k SKU catalog growth.
+2. **Continuity Price Lock**: Uninterrupted consecutive Annual renewals lock in the initial contracted rate against future list-price increases (cancellation/lapse voids the lock; re-contracting applies current list pricing).
+3. **Consecutive-Generation Upgrade Guarantee**: Official conflict-free `npm run sync-core` (`--online` and `--upgrade-from-zip`) and automated additive SQLite/PostgreSQL migrations are guaranteed strictly for consecutive-generation renewals (skip-generation re-contracts provision as fresh builds).
+4. **Annual SBOM & Offline Freshness Attestation**: `.startlyst/core-manifest.json` embeds `continuityGeneration`, 365-day `annualAttestationValidUntilUtc`, `protocolEpoch`, and deterministic `sbomDigestSha256`, verifiable 100% offline via `npm run renewal:brief` and Doctor v2 non-destructive advisories (`0–269d` `ATTESTATION_ACTIVE`, `270–364d` `RENEWAL_WINDOW_ADVISORY`, `365+d` `FROZEN_ATTESTATION_EXPIRED`, always `EXIT=0`).
+
+### 5.4 Verifying Downloaded Archive Integrity & Host Attestation
 ```bash
 shasum -a 256 <downloaded-storefront>.zip        # Compare against X-Startlyst-Delivered-Zip-Sha256
-npm run verify:install                           # Verify all file checksums & Merkle Root locally
+npm run verify:install                           # Verify all file checksums, Merkle Root & SBOM metadata locally
+npm run renewal:brief                            # Export 100% offline annual SBOM & continuity audit brief (EXIT=0)
 curl -sS https://startlyst.com/.well-known/startlyst-attestation.json
 ```
 

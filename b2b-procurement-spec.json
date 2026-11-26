@@ -111,9 +111,24 @@
     "brownfieldProtectedBytesMutated": 0,
     "doctorV2SelfRepair": {
       "domains": 7,
-      "checks": 19,
+      "checks": 20,
       "contractTests": 9,
-      "aiGuardrailBoundaryLinter": true
+      "aiGuardrailBoundaryLinter": true,
+      "offlineRenewalBriefCommand": "npm run renewal:brief",
+      "offlineFreshnessWindows": {
+        "activeDays": "0-269",
+        "renewalWindowDays": "270-364",
+        "frozenAttestationExpiredDays": "365+",
+        "nonDestructiveExitCode": 0
+      }
+    },
+    "symbioticAnnualContinuityModel": {
+      "gmvRevenueSharePct": 0,
+      "continuityPriceLock": true,
+      "consecutiveGenerationUpgradeGuarantee": true,
+      "annualComplianceAttestationDays": 365,
+      "sbomDigestTrackedInCoreManifest": true,
+      "zeroRuntimeLockIn": true
     },
     "highScaleMultiSkuMeasured": {
       "sqliteFts5Search100kSkusMs": 164,
@@ -144,7 +159,7 @@
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "977f3e6d33323c906168e1fbbf87f616136615f913fe480cbecf432d5582d4a4",
+  "merkleRootReference": "399aa8f8a6790c850f1253c48db9fa1cf7a6d90b01a61c40922211d18e731ebc",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",
