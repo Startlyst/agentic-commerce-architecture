@@ -309,6 +309,12 @@
             "default": 1,
             "description": "Number of storefronts or brands to deploy (integer 1-1000, defaults to 1). Counts above 1, 3, and 12 escalate tier selection and scale illustrative legacy base-stack costs."
           },
+          "skuCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000000,
+            "description": "Optional catalog size in SKUs (1 to 500,000+ supported natively via SQLite FTS5, PostgreSQL TSVECTOR + GIN, 50k Sitemap sharding, capped llms*.txt, and 5-tool paginated MCP). Catalogs >= 50,000 SKUs escalate to Enterprise tier or higher."
+          },
           "needsPostgresRls": {
             "type": "boolean",
             "default": false,

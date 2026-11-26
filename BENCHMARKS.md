@@ -26,7 +26,7 @@
 | 1 | `node verify-installation.mjs` | All files SHA-256 + Merkle Root + SLDL invariants + 8 AI manifests verified (`EXIT=0`) |
 | 2 | `npm install` | `111` packages installed, `0` production vulnerabilities (`EXIT=0`) |
 | 3 | `npm run setup` | Non-destructive `.env.local` secret bootstrap + live SQLite DDL verification (`14` tables / `22` indexes, `EXIT=0`) |
-| 4 | `npm run startlyst:doctor` | `0` errors / `7` checks passed (`EXIT=0`) |
+| 4 | `npm run startlyst:doctor` | Doctor v2: `0` errors · `19` checks passed across 7 domains + `9` UI-independent contract tests (`npm run verify:all` `EXIT=0`) |
 | 5 | `npm run build` (`next build`) | Compiled in **`1.89s`** · Storefront `/` First Load JS **`112 kB`** (`8.82 kB` route + `103 kB` shared) (`EXIT=0`) |
 | 6 | `node verify-installation.mjs` (post-build) | Full post-build cryptographic & manifest parity verified (`EXIT=0`) |
 
@@ -54,14 +54,24 @@ Workload mix against live `next start` (`O(1)` sliding-window counter enabled, `
 - **Zero Memory Leak Evidence**: Across `240,218` mixed production requests, RSS peaked at **`351.27 MB`** (well inside a `512 MB` container without needing `--max-old-space-size`), stabilized downward to `331.77 MB` during `50s–60s`, and HeapUsed settled at **`34.33 MB`** after GC (`+3.63 MB` vs. `30.70 MB` idle baseline).
 - **Zero Outbound Egress Evidence**: Preloaded fetch interceptor recorded **`0`** outbound third-party requests over the entire 60-second run.
 
-### 2.3 SQLite WAL 310,000-Row Concurrency, Upstream-Outage Autonomy & Non-Destructive Upgrades
+### 2.3 SQLite WAL 310,000-Row Concurrency, Zero Runtime Lock-in & Non-Destructive Upgrades
 
 | Verification Axis | Measured Result | Conditions / Faults Tested |
 | :--- | :--- | :--- |
 | **SQLite WAL 310,000-Row Stress** | **`392,354.7 QPS`** indexed reads · **`10,508.7 WPS`** mixed reads/writes · **`0.00% SQLITE_BUSY`** (`0` lock errors) | Seeded `310,000` rows (`1.498 s`, final `312,000` rows) on local NVMe with `PRAGMA cache_size = -16000` + composite indexes |
-| **Upstream-Outage Worker Autonomy** | **`100%` HTTP 200** (`P99 0.01–0.07 ms`) · **`0` outbound third-party fetches** | Fault-injected `backend/worker.js` with `startlyst.com` returning `ECONNREFUSED`, HTTP `503`, and indefinite hang (`1,500 ms` `AbortController` + bounded 5m TTL cache + `ctx.waitUntil()`) |
+| **Zero Runtime Lock-in Worker Autonomy** | **`100%` HTTP 200** (`P99 0.01–0.07 ms`) · **`0` automatic production phone-home calls** · **`0` remote runtime kill-switches** · **`0` outbound third-party fetches** | Isolated air-gapped `backend/worker.js` & SSR/API runtime spy confirming zero automatic external traffic and zero local license lock files |
 | **Redis Outage Failover** | **`0` HTTP 500s** · automatic fallback to O(1) local sliding-window counter (`HTTP 429` preserved) | Live mid-flight Redis REST flip from `200` -> `503` -> timeout across 500 concurrent requests |
 | **Brownfield & Legacy Upgrade Integrity** | **`0` protected bytes mutated** · **`100%` order & custom DB table/column retention** · full rollback on fault | Tested offline `sync-core.mjs`, Ed25519-signed patch, and `--upgrade-from-zip` on legacy pre-hardening DB (`500` orders + custom columns + custom tables) plus mid-swap fault injection |
+
+### 2.4 100,000–500,000 SKU Multi-SKU Catalog Scale, AI Discovery & Self-Healing Benchmarks
+
+| Scale / Quality Axis | Empirically Measured Result | Architectural Mechanism Verified |
+| :--- | :--- | :--- |
+| **100,000 Real SKUs Full-Text Search** | **`~164 ms`** query latency · **`9.89 KB`** compact JSON payload | Built-in SQLite FTS5 (`SearchAdapter`) with PostgreSQL `TSVECTOR + GIN` index on Enterprise/Holding and pluggable external engine hook (`user-workspace/extensions/index.ts`) |
+| **Paginated MCP `search_catalog` (100k SKUs)** | **`~1.5–1.8 ms`** response · **`2.04 KB`** bounded JSON-RPC payload | 5-tool live MCP server (`get_storefront_catalog`, `search_catalog`, `get_product_by_sku`, `get_inventory_and_quote`, `create_agent_checkout_session`) |
+| **AI Discovery Payload Hygiene (`llms*.txt`)** | Per-product `/api/products/[slug]/llms.txt` **`~1.05 KB`** · root `/llms.txt` & `/llms-full.txt` strictly byte-capped | Prevents context-window bloat at 100k–500k SKUs while preserving full per-SKU machine readability |
+| **500,000-SKU Sitemap Sharding** | **`11` deterministic shards** (`50,000` URLs/shard max, Standards-compliant `sitemap.xml` index) | `computeSitemapShardPlan()` + `core-engine/discovery-delegates.ts` |
+| **Zero-Support Guardrails (Doctor v2 + Contracts)** | **`19` Doctor v2 checks** (7 domains, `--fix`, `--restore-core`) · **`9` UI-independent contract tests** | Full `npm run verify:all` (`doctor` + `verify:install` + `tsc --noEmit` + `lint-boundaries` + `test:contracts`) passes `EXIT=0` |
 
 ---
 

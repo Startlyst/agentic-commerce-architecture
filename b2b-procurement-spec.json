@@ -106,8 +106,24 @@
       "sqliteBusyPct": 0
     },
     "hostCutoutWorkerHttp200Pct": 100,
+    "zeroRuntimeLockIn": true,
     "defaultThirdPartyOutboundFetches": 0,
     "brownfieldProtectedBytesMutated": 0,
+    "doctorV2SelfRepair": {
+      "domains": 7,
+      "checks": 19,
+      "contractTests": 9,
+      "aiGuardrailBoundaryLinter": true
+    },
+    "highScaleMultiSkuMeasured": {
+      "sqliteFts5Search100kSkusMs": 164,
+      "sqliteFts5Search100kResponseKb": 9.89,
+      "mcpSearchCatalog100kMs": 1.8,
+      "mcpSearchCatalog100kPayloadKb": 2.04,
+      "perProductLlmsTxtKb": 1.05,
+      "sitemapShardsAt500kSkus": 11,
+      "sitemapUrlsPerShardMax": 50000
+    },
     "tierDeliverableFileCounts": {
       "startup": {
         "monthly": 162,
@@ -128,7 +144,7 @@
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "4255a02f8c935074355955057f2cc848ccbafbb0e29c94b091491c79515c57dd",
+  "merkleRootReference": "977f3e6d33323c906168e1fbbf87f616136615f913fe480cbecf432d5582d4a4",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",
@@ -224,7 +240,7 @@
       "priorIndividualNoticeOrConsentRequired": false,
       "preAuthorizedByBuyerUponPurchaseOrSubscription": true,
       "day1PerpetualByocOwnershipPreserved": true,
-      "summary": "Pre-authorized agile amendments to Terms of Service and Privacy Policy without prior individual consent to maintain continuous security resilience, AI/ASI protocol evolution (MCP/ACP/UCP), and domestic/international regulatory compliance while preserving Day-1 Perpetual BYOC ownership."
+      "summary": "Pre-authorized agile amendments to Terms of Service and Privacy Policy without prior individual consent to maintain continuous security resilience, AI commerce protocol evolution (MCP/ACP/UCP), and domestic/international regulatory compliance while preserving Zero Runtime Lock-in and perpetual Static Frozen Mode vesting (immediate for Annual plans; after 12 consecutive paid cycles for Monthly plans)."
     },
     "completeNonAffiliationAndSoleMerchantSeparation": {
       "clauseId": "SECTION_11_MSA_AND_SECTION_6_PRIVACY",

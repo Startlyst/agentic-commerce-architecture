@@ -38,16 +38,20 @@
     }
   },
   "twoLayerIpBoundary": {
+    "zeroRuntimeLockIn": true,
     "openCustomizationZone": [
       "user-workspace/**",
+      "user-workspace/extensions/**",
+      "src/lib/security-utils.ts",
       "src/components/**",
       "src/app/globals.css",
       "ai-custom-adapter.schema.json"
     ],
     "sealedProprietaryZone": [
       "core-engine/sealed-core.cjs",
-      "core-engine/subscription-attestation-guard.ts"
+      "core-engine/subscription-attestation-guard.ts",
+      ".startlyst/core-manifest.json"
     ],
-    "policy": "Active subscribers and their AI agents (current LLMs through future Superintelligent AI / ASI) have 100% freedom to customize UI, responsive layouts, and checkout flows in user-workspace/** while sealed-core.cjs remains cryptographically attested."
+    "policy": "Licensed enterprises and their AI agents have 100% freedom to customize UI, responsive layouts, 7 extension hooks, security utilities, and checkout flows in user-workspace/** under Zero Runtime Lock-in (0 production phone-home calls), while core-engine/** remains read-only and SHA-256 integrity-verified for conflict-free updates."
   }
 }
