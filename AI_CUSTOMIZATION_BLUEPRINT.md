@@ -25,7 +25,7 @@
 ## 3. Two-Layer Ownership Boundary
 
 - **Writable Buyer-Owned Layer (`0` Bytes Mutated on Core Upgrades)**: `user-workspace/**`, `src/components/**` (including `AddressAutocomplete.tsx`), `src/app/globals.css`, `.env*`, `data/**`, `*.db` / `*.sqlite`, `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.mjs`, and custom buyer API routes.
-- **Protected Upgradable Kernel Layer (Managed via Ed25519 / `--upgrade-from-zip`)**: `core-engine/**`, `src/core-engine/**`, `.startlyst-license-lock.json`, managed security routes (`/api/checkout`, `/api/agent-checkout`, `/api/mcp`, `/api/webhooks/recovery`, `/api/healthz`, `/api/readyz`, `/api/admin/*`), and additive-only SQL migrations (`migrations/upgrade-additive-sqlite.sql`, `migrations/upgrade-additive-postgres.sql`).
+- **Protected Upgradable Kernel Layer (Managed via Ed25519 / `--upgrade-from-zip`)**: `core-engine/**`, `.startlyst/core-manifest.json`, managed security routes (`/api/checkout`, `/api/agent-checkout`, `/api/mcp`, `/api/webhooks/recovery`, `/api/healthz`, `/api/readyz`, `/api/admin/*`), and additive-only SQL migrations (`migrations/upgrade-additive-sqlite.sql`, `migrations/upgrade-additive-postgres.sql`).
 - **Open Typed Bridge**: [`sdk-types/startlyst.d.ts`](./sdk-types/startlyst.d.ts) and [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json).
 
 ---
