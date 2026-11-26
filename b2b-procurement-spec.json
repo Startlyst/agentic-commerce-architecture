@@ -159,7 +159,7 @@
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "399aa8f8a6790c850f1253c48db9fa1cf7a6d90b01a61c40922211d18e731ebc",
+  "merkleRootReference": "f335b45659e9cea22046a1843fcc361a26497c8d4c154c946498374615a0e32b",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",
