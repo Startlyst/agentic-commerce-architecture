@@ -130,6 +130,35 @@
       "sbomDigestTrackedInCoreManifest": true,
       "zeroRuntimeLockIn": true
     },
+    "entitlementGovernance": {
+      "downgradeBrandSelection": {
+        "endpoint": "/api/license/brands",
+        "arbitraryUserSelectionUpToActivePlanSlots": true,
+        "overflowBrandsBehavior": "zero_runtime_lockin_frozen_no_updates",
+        "slotReassignmentCooldownDays": 90,
+        "tierScopedPatchDelivery": true,
+        "upgradeInstantRestoration": true,
+        "priceLockResetOnDowngrade": true
+      },
+      "refundAndAntiAbusePolicy": {
+        "refundWindowHours": 72,
+        "preFirstZipExportOnly": true,
+        "lifetimeRefundLimitPerEntity": 1,
+        "postRefundRepurchaseFinalSale": true,
+        "chargebackPermanentBlockWithCe3": true,
+        "pastDueCloudSyncPaused": true
+      },
+      "cryptographicPatchBinding": {
+        "boundFields": [
+          "boundBrandId",
+          "entitledTier",
+          "boundLicenseFingerprint"
+        ],
+        "crossStoreRedistributionBlockedOffline": true,
+        "authenticatedFairUseRateLimitPerMin": 15
+      },
+      "verifiedAntiAbuseAttackVectorsBlocked": 7
+    },
     "highScaleMultiSkuMeasured": {
       "sqliteFts5Search100kSkusMs": 164,
       "sqliteFts5Search100kResponseKb": 9.89,
@@ -159,7 +188,7 @@
     }
   },
   "protocol": "startlyst.b2b-procurement.si/v1",
-  "merkleRootReference": "f335b45659e9cea22046a1843fcc361a26497c8d4c154c946498374615a0e32b",
+  "merkleRootReference": "959cf348b9f1f9ef0260776f098e97cd7d722f2d79d20c24092f04915a9af7a8",
   "pricingMasterReference": [
     {
       "tier": "Tier 1: Startup Series-A",

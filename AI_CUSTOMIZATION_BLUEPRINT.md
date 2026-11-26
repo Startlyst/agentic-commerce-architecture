@@ -27,13 +27,13 @@
 - **Writable Buyer-Owned Layer (`0` Bytes Mutated on Core Upgrades)**: `user-workspace/**`, `user-workspace/extensions/**` (7 typed business-logic hooks in `user-workspace/extensions/index.ts`), `src/components/**` (including `AddressAutocomplete.tsx`), open auditable `src/lib/security-utils.ts`, `src/app/globals.css`, `.env*`, `data/**`, `*.db` / `*.sqlite`, `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.mjs`, and custom buyer API routes.
 - **Protected Upgradable Kernel Layer (Managed via Ed25519 / `--upgrade-from-zip`)**: `core-engine/**`, `.startlyst/core-manifest.json`, managed security routes (`/api/checkout`, `/api/agent-checkout`, `/api/mcp`, `/api/webhooks/recovery`, `/api/healthz`, `/api/readyz`, `/api/admin/*`), and additive-only SQL migrations (`migrations/upgrade-additive-sqlite.sql`, `migrations/upgrade-additive-postgres.sql`).
 - **Open Typed Bridge, Offline SBOM Audit & Self-Repair**: [`sdk-types/startlyst.d.ts`](./sdk-types/startlyst.d.ts), [`ai-custom-adapter.schema.json`](./ai-custom-adapter.schema.json), Doctor v2 (`npm run doctor -- --json`, `--fix`, `--restore-core`, `npm run renewal:brief` for 100% offline 365-day SBOM & continuity status, always `EXIT=0`), and 9 UI-independent contract tests (`npm run verify:all`).
-- **Symbiotic Annual Continuity**: `0%` GMV tax, **Continuity Price Lock** across uninterrupted annual renewals (lapse voids lock), and **Consecutive-Generation Upgrade Guarantee** for conflict-free `npm run sync-core` migrations (lapsed skip-generation re-contracts compile fresh).
+- **Symbiotic Annual Continuity & Entitlement Governance**: `0%` GMV tax, **Continuity Price Lock** across uninterrupted annual renewals (cancellation, downgrade, or lapse voids lock), **Consecutive-Generation Upgrade Guarantee** for conflict-free `npm run sync-core` migrations (lapsed skip-generation re-contracts compile fresh), **Downgrade Brand Slot Selection** (`/api/license/brands`, 90-day swap cooldown, overflow stores stay running under Zero Runtime Lock-in and restore immediately upon re-upgrading), **Cryptographic Brand-Bound Ed25519 Patches** (`boundBrandId`, `entitledTier`, `boundLicenseFingerprint` verified offline), **Option B Pre-First-ZIP 72h Refund** (1 lifetime refund per entity; repurchases Final Sale), and authenticated Fair-Use burst protection (15 req/min).
 
 ---
 
 ## 4. Autonomous Evaluation via Read-Only MCP (`https://startlyst.com/api/mcp`)
 
-Procurement and research AI agents can evaluate regional fit (US, EU, UK, CH, AU, GLOBAL), customization rules, verified benchmarks, and exact Stripe USD pricing directly via JSON-RPC 2.0 `tools/call`:
+Procurement and research AI agents can evaluate regional fit (US, EU, UK, CH, AU, GLOBAL), customization rules, verified benchmarks, structured `entitlementGovernance`, and exact Stripe USD pricing directly via JSON-RPC 2.0 `tools/call`:
 - `evaluate_architecture_fit`
 - `get_ai_customization_blueprint`
 - `get_verified_benchmarks`
